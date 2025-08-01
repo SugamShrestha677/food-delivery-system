@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Restaurant-quality meals in 30 mins - Food Delivery{% endblock %}
+
+{% block content %}
+
+
+<!-- Footer Component -->
+<footer class="footer-section w-full pt-12 pb-6 flex flex-col items-center bg-gray-900">
+    <!-- Main Footer Content -->
+    <div class="footer-content w-full max-w-7xl flex justify-between items-start px-56 mb-52 gap-16 lg:px-10 lg:flex-wrap lg:gap-16 lg:mb-30 md:flex-col md:px-5 md:gap-12 md:mb-15">
+        <!-- Logo Section -->
+        <div class="footer-logo-section flex flex-col items-start lg:w-full lg:text-center lg:items-center md:w-full md:items-center md:text-center">
+            <div class="logo-container inline-flex p-2.5 justify-center items-center gap-2.5 w-18 h-11">
+                <div class="logo-text text-red-700 text-center font-bold text-xl leading-6 tracking-normal font-inter">
+                    Logo
+                </div>
+            </div>
+            <div class="tagline text-blue-100 text-center text-lg leading-6 tracking-tight mt-3 w-71 lg:text-center font-inter">
+                Delivering happiness to your doorstep
+            </div>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="footer-links-section flex flex-col items-start lg:flex-1 lg:min-w-50 md:w-full md:items-center md:text-center">
+            <div class="section-title text-white text-center text-xl leading-6 tracking-tight mb-9 md:mb-5 font-inter">
+                Quick Links
+            </div>
+            <div class="links-list flex flex-col gap-20 md:items-center">
+                <div class="link-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="#" class="link-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        About Us
+                    </a>
+                </div>
+                <div class="link-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="#" class="link-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        Restaurants
+                    </a>
+                </div>
+                <div class="link-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="#" class="link-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        Contact
+                    </a>
+                </div>
+                <div class="link-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="#" class="link-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        Help
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legal Section -->
+        <div class="footer-legal-section flex flex-col items-start lg:flex-1 lg:min-w-50 md:w-full md:items-center md:text-center">
+            <div class="section-title text-white text-center text-xl leading-6 tracking-tight mb-9 md:mb-5 font-inter">
+                Legal
+            </div>
+            <div class="legal-links flex flex-col gap-1 md:items-center">
+                <div class="link-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="#" class="link-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        Privacy Policy
+                    </a>
+                </div>
+                <div class="link-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="#" class="link-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        Terms of Service
+                    </a>
+                </div>
+                <div class="link-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="#" class="link-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        Cookie Policy
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="footer-contact-section flex flex-col items-start lg:flex-1 lg:min-w-50 md:w-full md:items-center md:text-center">
+            <div class="section-title text-white text-center text-xl leading-6 tracking-tight mb-9 md:mb-5 font-inter">
+                Contact
+            </div>
+            <div class="contact-info flex flex-col gap-1 md:items-center">
+                <div class="contact-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="mailto:support@logodelivery.com" class="contact-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        support@logodelivery.com
+                    </a>
+                </div>
+                <div class="contact-item inline-flex p-2.5 justify-center items-center gap-25">
+                    <a href="tel:+97701662345" class="contact-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter hover:text-white transition-colors">
+                        +977 01-662345
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="footer-copyright inline-flex p-2.5 justify-center items-center gap-25 w-92 h-11 md:w-full md:max-w-92">
+        <div class="copyright-text text-blue-100 text-center text-lg leading-6 tracking-tight font-inter">
+            © App 2020 Food Delivery. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+{% endblock %}

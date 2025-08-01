@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Restaurants</h1>
+    <div id="restaurant-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Restaurants will be loaded here -->
+    </div>
+</div>
+
+<script>
+// Load restaurants when page loads
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const restaurants = await apiCall('/api/restaurant/restaurantList/');
+        const restaurantList = document.getElementById('restaurant-list');
+        
+        restaurants.forEach(restaurant => {
+            restaurantList.innerHTML += `
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-semibold">${restaurant.restaurant_name}</h2>
+                    <p class="text-gray-600">${restaurant.address}</p>
+                    <button 
+                        onclick="viewMenu(${restaurant.id})"
+                        class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    >
+                        View Menu
+                    </button>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error('Error loading restaurants:', error);
+    }
+});
+
+async function viewMenu(restaurantId) {
+    window.location.href = `/restaurant/${restaurantId}/`;
+}
+</script>
+{% endblock %}

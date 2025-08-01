@@ -1,0 +1,704 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Restaurant-quality meals in 30 mins - Food Delivery{% endblock %}
+
+{% block content %}
+
+<!-- Include Header -->
+{% include 'header.html' %}
+
+<!-- Hero Section -->
+<section class="hero-overlay min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+  <div class="w-full max-w-7xl mx-auto flex flex-col items-center text-center">
+    <!-- Main Headline -->
+    <h1 class="text-white text-center mb-6 sm:mb-8 lg:mb-10 text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium leading-tight lg:leading-[85px]" style="font-family: 'Fira Sans', sans-serif;">
+      Restaurant-quality meals<br>
+      in 30 mins
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-white text-center mb-8 sm:mb-12 lg:mb-16 max-w-4xl text-base sm:text-lg lg:text-xl font-normal leading-relaxed px-4" style="font-family: 'Inter', sans-serif;">
+      Discover amazing food from local restaurants delivered to your door
+    </p>
+
+    <!-- Search Container -->
+    <div class="search-container w-full max-w-4xl">
+
+      <!-- Desktop Layout -->
+      <div class="hidden lg:block relative h-52">
+        <!-- Location Dropdown -->
+        <button id="location-btn" class="location-dropdown absolute left-8 top-8 w-36 h-12 cursor-pointer hover:shadow-md transition-shadow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 9.58341C9.44747 9.58341 8.91757 9.36392 8.52687 8.97322C8.13617 8.58252 7.91667 8.05262 7.91667 7.50008C7.91667 6.94755 8.13617 6.41764 8.52687 6.02694C8.91757 5.63624 9.44747 5.41675 10 5.41675C10.5525 5.41675 11.0824 5.63624 11.4731 6.02694C11.8638 6.41764 12.0833 6.94755 12.0833 7.50008C12.0833 7.77367 12.0295 8.04458 11.9248 8.29734C11.8201 8.5501 11.6666 8.77977 11.4731 8.97322C11.2797 9.16668 11.05 9.32013 10.7973 9.42483C10.5445 9.52953 10.2736 9.58341 10 9.58341ZM10 1.66675C8.45291 1.66675 6.96918 2.28133 5.87522 3.37529C4.78125 4.46925 4.16667 5.95299 4.16667 7.50008C4.16667 11.8751 10 18.3334 10 18.3334C10 18.3334 15.8333 11.8751 15.8333 7.50008C15.8333 5.95299 15.2188 4.46925 14.1248 3.37529C13.0308 2.28133 11.5471 1.66675 10 1.66675Z" fill="#757575"/>
+          </svg>
+          <span id="selected-location" class="text-gray-600 text-center font-medium" style="font-family: 'Space Grotesk', sans-serif;">New York</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00001 5.83325L10 10.8333L15 5.83325L16.6667 7.49992L10 14.1666L3.33334 7.49992L5.00001 5.83325Z" fill="#757575"/>
+          </svg>
+        </button>
+
+        <!-- Location Dropdown Menu -->
+        <div id="location-dropdown" class="absolute left-8 top-20 w-48 bg-white rounded-lg shadow-lg border hidden z-10">
+          <div class="py-2">
+            <button class="location-option w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors" data-location="New York">New York</button>
+            <button class="location-option w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors" data-location="Los Angeles">Los Angeles</button>
+            <button class="location-option w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors" data-location="Chicago">Chicago</button>
+            <button class="location-option w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors" data-location="Miami">Miami</button>
+          </div>
+        </div>
+
+        <!-- Search Input -->
+        <div class="search-input absolute left-56 top-8 w-80 h-12 cursor-text">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 2.5C9.6446 2.50012 8.30887 2.82436 7.10427 3.44569C5.89966 4.06702 4.8611 4.96742 4.07525 6.07175C3.28939 7.17609 2.77902 8.45235 2.58672 9.79404C2.39442 11.1357 2.52576 12.504 2.96979 13.7846C3.41382 15.0652 4.15766 16.2211 5.13925 17.1557C6.12084 18.0904 7.31171 18.7768 8.61252 19.1576C9.91333 19.5384 11.2864 19.6026 12.617 19.3449C13.9477 19.0872 15.1975 18.515 16.262 17.676L19.914 21.328C20.1026 21.5102 20.3552 21.611 20.6174 21.6087C20.8796 21.6064 21.1304 21.5012 21.3158 21.3158C21.5012 21.1304 21.6064 20.8796 21.6087 20.6174C21.611 20.3552 21.5102 20.1026 21.328 19.914L17.676 16.262C18.664 15.0086 19.2792 13.5024 19.4511 11.9157C19.623 10.3291 19.3448 8.72602 18.6482 7.29009C17.9517 5.85417 16.8649 4.64336 15.5123 3.79623C14.1597 2.94911 12.596 2.49989 11 2.5ZM4.50001 11C4.50001 9.27609 5.18483 7.62279 6.40382 6.40381C7.6228 5.18482 9.2761 4.5 11 4.5C12.7239 4.5 14.3772 5.18482 15.5962 6.40381C16.8152 7.62279 17.5 9.27609 17.5 11C17.5 12.7239 16.8152 14.3772 15.5962 15.5962C14.3772 16.8152 12.7239 17.5 11 17.5C9.2761 17.5 7.6228 16.8152 6.40382 15.5962C5.18483 14.3772 4.50001 12.7239 4.50001 11Z" fill="#757575"/>
+          </svg>
+          <input id="search-input" type="text" class="flex-1 bg-transparent outline-none text-gray-700 font-medium" placeholder="Search for restaurants" style="font-family: 'Space Grotesk', sans-serif;">
+        </div>
+
+        <!-- Find Food Button -->
+        <button id="find-food-btn" class="find-food-btn absolute right-8 top-7 w-32 h-12 flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+          <span class="text-white font-semibold text-xl" style="font-family: 'Inter', sans-serif;">Find Restaurant</span>
+        </button>
+
+        <!-- Food Tags -->
+        <div class="absolute left-48 top-30 flex gap-3 justify-center">
+          <button class="food-tag inline-flex justify-center items-center hover:shadow-md transition-shadow cursor-pointer" data-category="Pizza" style="font-family: 'Inter', sans-serif;">Pizza</button>
+          <button class="food-tag inline-flex justify-center items-center hover:shadow-md transition-shadow cursor-pointer" data-category="Burger" style="font-family: 'Inter', sans-serif;">Burger</button>
+          <button class="food-tag inline-flex justify-center items-center hover:shadow-md transition-shadow cursor-pointer" data-category="Sushi" style="font-family: 'Inter', sans-serif;">Sushi</button>
+          <button class="food-tag inline-flex justify-center items-center hover:shadow-md transition-shadow cursor-pointer" data-category="Chinese" style="font-family: 'Inter', sans-serif;">Chinese</button>
+          <button class="food-tag inline-flex justify-center items-center hover:shadow-md transition-shadow cursor-pointer" data-category="Italian" style="font-family: 'Inter', sans-serif;">Italian</button>
+        </div>
+      </div>
+
+      <!-- Mobile Layout -->
+      <div class="block lg:hidden p-4 sm:p-6 space-y-4">
+        <!-- Location Dropdown -->
+        <button id="location-btn-mobile" class="location-dropdown w-full h-12 sm:h-14 cursor-pointer hover:shadow-md transition-shadow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 9.58341C9.44747 9.58341 8.91757 9.36392 8.52687 8.97322C8.13617 8.58252 7.91667 8.05262 7.91667 7.50008C7.91667 6.94755 8.13617 6.41764 8.52687 6.02694C8.91757 5.63624 9.44747 5.41675 10 5.41675C10.5525 5.41675 11.0824 5.63624 11.4731 6.02694C11.8638 6.41764 12.0833 6.94755 12.0833 7.50008C12.0833 7.77367 12.0295 8.04458 11.9248 8.29734C11.8201 8.5501 11.6666 8.77977 11.4731 8.97322C11.2797 9.16668 11.05 9.32013 10.7973 9.42483C10.5445 9.52953 10.2736 9.58341 10 9.58341ZM10 1.66675C8.45291 1.66675 6.96918 2.28133 5.87522 3.37529C4.78125 4.46925 4.16667 5.95299 4.16667 7.50008C4.16667 11.8751 10 18.3334 10 18.3334C10 18.3334 15.8333 11.8751 15.8333 7.50008C15.8333 5.95299 15.2188 4.46925 14.1248 3.37529C13.0308 2.28133 11.5471 1.66675 10 1.66675Z" fill="#757575"/>
+          </svg>
+          <span id="selected-location-mobile" class="text-gray-600 font-medium" style="font-family: 'Space Grotesk', sans-serif;">New York</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00001 5.83325L10 10.8333L15 5.83325L16.6667 7.49992L10 14.1666L3.33334 7.49992L5.00001 5.83325Z" fill="#757575"/>
+          </svg>
+        </button>
+
+        <!-- Search Input -->
+        <div class="search-input w-full h-12 sm:h-14 cursor-text">
+          <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 2.5C9.6446 2.50012 8.30887 2.82436 7.10427 3.44569C5.89966 4.06702 4.8611 4.96742 4.07525 6.07175C3.28939 7.17609 2.77902 8.45235 2.58672 9.79404C2.39442 11.1357 2.52576 12.504 2.96979 13.7846C3.41382 15.0652 4.15766 16.2211 5.13925 17.1557C6.12084 18.0904 7.31171 18.7768 8.61252 19.1576C9.91333 19.5384 11.2864 19.6026 12.617 19.3449C13.9477 19.0872 15.1975 18.515 16.262 17.676L19.914 21.328C20.1026 21.5102 20.3552 21.611 20.6174 21.6087C20.8796 21.6064 21.1304 21.5012 21.3158 21.3158C21.5012 21.1304 21.6064 20.8796 21.6087 20.6174C21.611 20.3552 21.5102 20.1026 21.328 19.914L17.676 16.262C18.664 15.0086 19.2792 13.5024 19.4511 11.9157C19.623 10.3291 19.3448 8.72602 18.6482 7.29009C17.9517 5.85417 16.8649 4.64336 15.5123 3.79623C14.1597 2.94911 12.596 2.49989 11 2.5ZM4.50001 11C4.50001 9.27609 5.18483 7.62279 6.40382 6.40381C7.6228 5.18482 9.2761 4.5 11 4.5C12.7239 4.5 14.3772 5.18482 15.5962 6.40381C16.8152 7.62279 17.5 9.27609 17.5 11C17.5 12.7239 16.8152 14.3772 15.5962 15.5962C14.3772 16.8152 12.7239 17.5 11 17.5C9.2761 17.5 7.6228 16.8152 6.40382 15.5962C5.18483 14.3772 4.50001 12.7239 4.50001 11Z" fill="#757575"/>
+          </svg>
+          <input id="search-input-mobile" type="text" class="flex-1 bg-transparent outline-none text-gray-700 font-medium" placeholder="Search for restaurants" style="font-family: 'Space Grotesk', sans-serif;">
+        </div>
+
+        <!-- Find Food Button -->
+        <button id="find-food-btn-mobile" class="find-food-btn w-full h-12 sm:h-14 flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow">
+          <span class="text-white font-semibold text-base sm:text-lg" style="font-family: 'Inter', sans-serif;">Find Food</span>
+        </button>
+
+        <!-- Food Tags -->
+        <div class="flex flex-wrap gap-2 sm:gap-3 justify-center pt-2">
+          <button class="food-tag inline-flex justify-center items-center text-sm sm:text-base hover:shadow-md transition-shadow cursor-pointer" data-category="Pizza" style="font-family: 'Inter', sans-serif;">Pizza</button>
+          <button class="food-tag inline-flex justify-center items-center text-sm sm:text-base hover:shadow-md transition-shadow cursor-pointer" data-category="Burger" style="font-family: 'Inter', sans-serif;">Burger</button>
+          <button class="food-tag inline-flex justify-center items-center text-sm sm:text-base hover:shadow-md transition-shadow cursor-pointer" data-category="Sushi" style="font-family: 'Inter', sans-serif;">Sushi</button>
+          <button class="food-tag inline-flex justify-center items-center text-sm sm:text-base hover:shadow-md transition-shadow cursor-pointer" data-category="Chinese" style="font-family: 'Inter', sans-serif;">Chinese</button>
+          <button class="food-tag inline-flex justify-center items-center text-sm sm:text-base hover:shadow-md transition-shadow cursor-pointer" data-category="Italian" style="font-family: 'Inter', sans-serif;">Italian</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Join with us Section -->
+<section class="bg-gray-100 py-12 sm:py-16 lg:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-8 sm:mb-12">
+      <h2 class="text-gray-900 text-center mb-4 sm:mb-5 text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
+        Join with us
+      </h2>
+      <p class="text-gray-600 text-center max-w-lg mx-auto text-base sm:text-lg font-normal leading-relaxed px-4" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">
+        Choose your role and start enjoying the benefits of our platform
+      </p>
+    </div>
+
+    <!-- Role Cards -->
+    <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-20 justify-center items-stretch">
+
+      <!-- Customer Card -->
+      <div class="w-full max-w-sm mx-auto relative">
+        <!-- Card Top Border -->
+        <div class="card-gradient-blue w-full h-4 rounded-t-2xl"></div>
+
+        <!-- Card Content -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 lg:p-12 flex flex-col items-center text-center" style="margin-top: -2px;">
+          <!-- Icon -->
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-blue-100 flex items-center justify-center mb-3">
+            <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.5 0C19.8206 0 22.0462 0.921872 23.6872 2.56282C25.3281 4.20376 26.25 6.42936 26.25 8.75C26.25 11.0706 25.3281 13.2962 23.6872 14.9372C22.0462 16.5781 19.8206 17.5 17.5 17.5C15.1794 17.5 12.9538 16.5781 11.3128 14.9372C9.67187 13.2962 8.75 11.0706 8.75 8.75C8.75 6.42936 9.67187 4.20376 11.3128 2.56282C12.9538 0.921872 15.1794 0 17.5 0ZM17.5 21.875C27.1688 21.875 35 25.7906 35 30.625V35H0V30.625C0 25.7906 7.83125 21.875 17.5 21.875Z" fill="#3B82F6"/>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-black text-center mb-3 sm:mb-4 text-lg sm:text-xl font-bold" style="font-family: 'Inter', sans-serif;">Customer</h3>
+
+          <!-- Description -->
+          <p class="text-black text-center mb-6 sm:mb-8 text-base sm:text-lg font-normal px-2" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">
+            Order from your favorite restaurants and get food delivered to your door
+          </p>
+
+          <!-- Features -->
+          <div class="w-full mb-6 sm:mb-8 lg:mb-10">
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Fast delivery in 30 minutes</span>
+            </div>
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Exclusive discounts</span>
+            </div>
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Easy payment options</span>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <button class="register-btn btn-gradient-blue w-full h-11 sm:h-12 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow" data-role="customer">
+            <span class="text-white text-center text-base sm:text-lg lg:text-xl font-bold" style="font-family: 'Inter', sans-serif;">Register as Customer</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Restaurant Card -->
+      <div class="w-full max-w-sm mx-auto relative">
+        <!-- Card Top Border -->
+        <div class="card-gradient-green w-full h-4 rounded-t-2xl"></div>
+
+        <!-- Card Content -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 lg:p-12 flex flex-col items-center text-center" style="margin-top: -2px;">
+          <!-- Icon -->
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-100 flex items-center justify-center mb-3">
+            <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.5 16.0417H10.5365L10.1354 18.9584H24.8646L24.5 16.0417ZM5.83333 29.1667L7.61979 16.0417H4.375C3.88888 16.0417 3.50583 15.8473 3.22583 15.4584C2.94583 15.0695 2.86708 14.6441 2.98958 14.1823L5.0677 6.89067C5.16493 6.57469 5.33506 6.31948 5.57812 6.12504C5.82118 5.9306 6.11284 5.83337 6.45312 5.83337H28.5469C28.8871 5.83337 29.1788 5.9306 29.4219 6.12504C29.6649 6.31948 29.8351 6.57469 29.9323 6.89067L32.0104 14.1823C32.1319 14.6441 32.0532 15.0695 31.7742 15.4584C31.4951 15.8473 31.1121 16.0417 30.625 16.0417H27.4167L29.1667 29.1667H26.25L25.2656 21.875H9.73437L8.74999 29.1667H5.83333Z" fill="#11B982"/>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-black text-center mb-3 sm:mb-4 text-lg sm:text-xl font-bold" style="font-family: 'Inter', sans-serif;">Restaurant</h3>
+
+          <!-- Description -->
+          <p class="text-black text-center mb-6 sm:mb-8 text-base sm:text-lg font-normal px-2" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">
+            Reach more customers and grow your business with our platform
+          </p>
+
+          <!-- Features -->
+          <div class="w-full mb-6 sm:mb-8 lg:mb-10">
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Increased visibility</span>
+            </div>
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Dedicated support team</span>
+            </div>
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Easy order management</span>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <button class="register-btn btn-gradient-green w-full h-11 sm:h-12 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow" data-role="restaurant">
+            <span class="text-white text-center text-base sm:text-lg lg:text-xl font-bold" style="font-family: 'Inter', sans-serif;">Register as Restaurant</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Delivery Partner Card -->
+      <div class="w-full max-w-sm mx-auto relative">
+        <!-- Card Top Border -->
+        <div class="card-gradient-orange w-full h-4 rounded-t-2xl"></div>
+
+        <!-- Card Content -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 lg:p-12 flex flex-col items-center text-center" style="margin-top: -2px;">
+          <!-- Icon -->
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-yellow-100 flex items-center justify-center mb-3">
+            <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M20.4166 7.29163C20.5557 7.2917 20.6919 7.33155 20.8091 7.40649C20.9263 7.48142 21.0196 7.58831 21.078 7.71454L26.0363 18.4114C27.1835 18.0814 28.413 18.1964 29.4791 18.7335C30.5451 19.2705 31.3693 20.1901 31.7869 21.3084C32.2044 22.4267 32.1846 23.6614 31.7314 24.7657C31.2782 25.8701 30.4249 26.7627 29.3422 27.2653C28.2594 27.7679 27.0269 27.8434 25.8909 27.4767C24.7548 27.11 23.799 26.3282 23.2144 25.2875C22.6298 24.2467 22.4594 23.0237 22.7374 21.8627C23.0153 20.7018 23.7211 19.6885 24.7136 19.0254L19.95 8.74996H16.7708V7.29163H20.4166ZM25.6535 21.0561C25.1942 21.4621 24.8963 22.0198 24.8144 22.6274C24.7325 23.2349 24.872 23.8516 25.2074 24.3648C25.5428 24.8779 26.0517 25.2531 26.6411 25.4219C27.2304 25.5906 27.8608 25.5416 28.417 25.2837C28.9732 25.0259 29.418 24.5765 29.67 24.0176C29.922 23.4588 29.9645 22.8279 29.7896 22.2404C29.6147 21.6528 29.2342 21.1478 28.7176 20.8178C28.201 20.4877 27.5829 20.3546 26.9762 20.4429L28.0051 22.6617C28.0812 22.8363 28.086 23.0338 28.0184 23.2119C27.9508 23.39 27.8162 23.5345 27.6433 23.6146C27.4705 23.6948 27.2732 23.7041 27.0936 23.6406C26.9141 23.5771 26.7664 23.4459 26.6824 23.275L25.6535 21.0561ZM12.3404 23.6979C12.154 24.8752 11.531 25.9391 10.5954 26.6777C9.65981 27.4163 8.48035 27.7754 7.29191 27.6835C6.10347 27.5915 4.99328 27.0553 4.18246 26.1815C3.37164 25.3078 2.91969 24.1607 2.91663 22.9687C2.91498 21.7739 3.36469 20.6225 4.17573 19.745C4.98677 18.8676 6.09928 18.3289 7.29058 18.2367C8.48186 18.1445 9.66401 18.5057 10.6004 19.2479C11.5367 19.9902 12.1582 21.0587 12.3404 22.2395H14.5833V21.1458C14.5833 20.759 14.7369 20.3881 15.0104 20.1146C15.2839 19.8411 15.6549 19.6875 16.0416 19.6875H20.4166V22.6041C20.4166 22.9909 20.263 23.3618 19.9895 23.6353C19.716 23.9088 19.3451 24.0625 18.9583 24.0625H16.0416C15.6668 24.0625 15.3249 23.921 15.066 23.6884C15.027 23.6948 14.9874 23.6979 14.9479 23.6979H12.3404ZM7.65621 25.5208C7.18294 25.5207 6.71901 25.3889 6.31629 25.1403C5.91356 24.8917 5.5879 24.536 5.3757 24.113C5.16349 23.69 5.0731 23.2162 5.11463 22.7448C5.15615 22.2733 5.32796 21.8227 5.61085 21.4433C5.89373 21.0639 6.27656 20.7706 6.71654 20.5962C7.15652 20.4218 7.63632 20.3732 8.10234 20.4558C8.56835 20.5384 9.00221 20.749 9.35544 21.064C9.70867 21.379 9.96734 21.786 10.1026 22.2395H7.65621C7.46283 22.2395 7.27736 22.3164 7.14062 22.4531C7.00387 22.5899 6.92705 22.7753 6.92705 22.9687C6.92705 23.1621 7.00387 23.3476 7.14062 23.4843C7.27736 23.6211 7.46283 23.6979 7.65621 23.6979H10.1026C9.94551 24.2247 9.62256 24.6867 9.18177 25.0151C8.74098 25.3436 8.20592 25.5209 7.65621 25.5208Z" fill="#F6AB29"/>
+              <path d="M20.4553 17.4227L21.1844 15.9644C21.2856 15.762 21.3382 15.5388 21.3382 15.3125C21.3382 15.0862 21.2856 14.863 21.1844 14.6606L20.4553 13.2023C20.3341 12.9599 20.1478 12.756 19.9173 12.6135C19.6867 12.4711 19.4211 12.3957 19.1501 12.3958H16.7584C16.1228 12.3959 15.4916 12.4998 14.8895 12.7035L12.5963 13.4786C12.4885 13.5151 12.3907 13.5762 12.3108 13.6572C12.2308 13.7382 12.171 13.8368 12.136 13.9451C12.1009 14.0534 12.0918 14.1684 12.1092 14.2809C12.1266 14.3933 12.17 14.5002 12.2361 14.5928L14.6081 17.9229C14.6755 18.0177 14.7647 18.0949 14.8681 18.1482C14.9714 18.2014 15.0861 18.2292 15.2024 18.2292H19.1508C19.4217 18.2292 19.6872 18.1537 19.9176 18.0113C20.148 17.8688 20.3342 17.665 20.4553 17.4227ZM10.1237 14.1334C10.0554 14.0463 9.96818 13.9759 9.86863 13.9275C9.76908 13.8791 9.65981 13.8541 9.54913 13.8542H3.64579C3.45241 13.8542 3.26694 13.931 3.13019 14.0677C2.99345 14.2045 2.91663 14.3899 2.91663 14.5833V15.7536C2.91661 15.9332 2.98282 16.1064 3.10256 16.2401C3.2223 16.3738 3.38717 16.4587 3.56558 16.4784L11.8978 17.4045C11.9693 17.4127 12.0416 17.3996 12.1057 17.3667C12.1698 17.3339 12.2227 17.2829 12.2578 17.22C12.2928 17.1572 12.3085 17.0853 12.3029 17.0136C12.2972 16.9418 12.2704 16.8733 12.2259 16.8168L10.1237 14.1334ZM27.4531 11.0928C27.4194 11.0448 27.3747 11.0056 27.3226 10.9786C27.2706 10.9515 27.2128 10.9374 27.1541 10.9375H24.2878C24.2256 10.9375 24.1645 10.9534 24.1102 10.9837C24.0559 11.014 24.0102 11.0577 23.9776 11.1106C23.9449 11.1635 23.9263 11.2238 23.9236 11.2859C23.9208 11.3481 23.934 11.4098 23.9618 11.4654L25.4202 14.3821C25.4505 14.4426 25.497 14.4934 25.5546 14.529C25.6121 14.5645 25.6785 14.5833 25.7461 14.5833H29.1951C29.2618 14.5834 29.3273 14.5652 29.3844 14.5306C29.4415 14.496 29.488 14.4464 29.5188 14.3872C29.5497 14.328 29.5637 14.2615 29.5593 14.1949C29.5549 14.1283 29.5323 14.0641 29.494 14.0095L27.4531 11.0928Z" fill="#F6AB29"/>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-black text-center mb-3 sm:mb-4 text-lg sm:text-xl font-bold" style="font-family: 'Inter', sans-serif;">Delivery Partner</h3>
+
+          <!-- Description -->
+          <p class="text-black text-center mb-6 sm:mb-8 text-base sm:text-lg font-normal px-2" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">
+            Earn money with flexible hours delivering food to customers
+          </p>
+
+          <!-- Features -->
+          <div class="w-full mb-6 sm:mb-8 lg:mb-10">
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Flexible schedule</span>
+            </div>
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Competitive earnings</span>
+            </div>
+            <div class="flex items-center mb-3 sm:mb-4 gap-2">
+              <svg width="18" height="18" class="sm:w-21 sm:h-21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5 1.75C5.6875 1.75 1.75 5.6875 1.75 10.5C1.75 15.3125 5.6875 19.25 10.5 19.25C15.3125 19.25 19.25 15.3125 19.25 10.5C19.25 5.6875 15.3125 1.75 10.5 1.75ZM8.75 14.875L4.375 10.5L5.60875 9.26625L8.75 12.3988L15.3913 5.7575L16.625 7L8.75 14.875Z" fill="#11B982"/>
+              </svg>
+              <span class="text-black text-base sm:text-lg font-normal" style="font-family: 'Inter', sans-serif; letter-spacing: -1px;">Easy-to-use app</span>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <button class="register-btn btn-gradient-orange w-full h-11 sm:h-12 rounded-lg flex items-center justify-center cursor-pointer hover:shadow-lg transition-shadow" data-role="driver">
+            <span class="text-white text-center text-base sm:text-lg lg:text-xl font-bold" style="font-family: 'Inter', sans-serif;">Register as Driver</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Include How It Works Section -->
+{% include 'components/how_it_works_section.html' %}
+
+<!-- Include App Download Section -->
+{% include 'components/app_download_section.html' %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // === SEARCH FUNCTIONALITY ===
+
+    // Location dropdown functionality
+    const locationBtns = [
+        document.getElementById('location-btn'),
+        document.getElementById('location-btn-mobile')
+    ].filter(Boolean);
+
+    const locationDropdown = document.getElementById('location-dropdown');
+    const selectedLocationElements = [
+        document.getElementById('selected-location'),
+        document.getElementById('selected-location-mobile')
+    ].filter(Boolean);
+
+    // Toggle location dropdown
+    locationBtns.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (locationDropdown) {
+                    locationDropdown.classList.toggle('hidden');
+                }
+            });
+        }
+    });
+
+    // Location selection
+    document.querySelectorAll('.location-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const selectedLocation = this.getAttribute('data-location');
+            selectedLocationElements.forEach(el => {
+                if (el) el.textContent = selectedLocation;
+            });
+            if (locationDropdown) {
+                locationDropdown.classList.add('hidden');
+            }
+
+            // Show toast notification
+            showToast(`Location changed to ${selectedLocation}`, 'success');
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function() {
+        if (locationDropdown) {
+            locationDropdown.classList.add('hidden');
+        }
+    });
+
+    // Search functionality
+    const searchInputs = [
+        document.getElementById('search-input'),
+        document.getElementById('search-input-mobile')
+    ].filter(Boolean);
+
+    const findFoodBtns = [
+        document.getElementById('find-food-btn'),
+        document.getElementById('find-food-btn-mobile')
+    ].filter(Boolean);
+
+    // Search input handling
+    searchInputs.forEach(input => {
+        if (input) {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            input.addEventListener('focus', function() {
+                this.parentElement.style.borderColor = '#FF6600';
+                this.parentElement.style.boxShadow = '0 0 0 2px rgba(255, 102, 0, 0.2)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.style.borderColor = '#FF6600';
+                this.parentElement.style.boxShadow = 'none';
+            });
+        }
+    });
+
+    // Find Food button functionality
+    findFoodBtns.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', performSearch);
+        }
+    });
+
+    function performSearch() {
+        const searchQuery = searchInputs.find(input => input && input.value.trim())?.value.trim() || '';
+        const currentLocation = selectedLocationElements[0]?.textContent || 'New York';
+
+        if (searchQuery) {
+            showToast(`Searching for "${searchQuery}" in ${currentLocation}...`, 'info');
+            // Simulate search delay
+            setTimeout(() => {
+                showToast(`Found 25+ restaurants for "${searchQuery}" in ${currentLocation}!`, 'success');
+            }, 1500);
+        } else {
+            showToast('Please enter a restaurant name or cuisine type', 'warning');
+        }
+    }
+
+    // === FOOD CATEGORY FUNCTIONALITY ===
+
+    document.querySelectorAll('.food-tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            const category = this.getAttribute('data-category') || this.textContent.trim();
+            const currentLocation = selectedLocationElements[0]?.textContent || 'New York';
+
+            // Visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+
+            // Update search input
+            searchInputs.forEach(input => {
+                if (input) input.value = category;
+            });
+
+            showToast(`Searching for ${category} restaurants in ${currentLocation}...`, 'info');
+
+            // Simulate search
+            setTimeout(() => {
+                showToast(`Found 15+ ${category} restaurants in ${currentLocation}!`, 'success');
+            }, 1200);
+        });
+
+        // Hover effects
+        tag.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.transition = 'all 0.2s ease';
+            this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        });
+
+        tag.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    // === REGISTRATION FUNCTIONALITY ===
+
+    const registrationData = {
+        customer: {
+            title: 'Customer Registration',
+            action: '/api/auth/register/',
+            fields: ['fullName', 'email', 'phone', 'password', 'address']
+        },
+        restaurant: {
+            title: 'Restaurant Registration',
+            action: '/api/restaurant/register/',
+            fields: ['restaurantName', 'ownerName', 'email', 'phone', 'address', 'deliveryFee']
+        },
+        driver: {
+            title: 'Driver Registration',
+            action: '/api/delivery/register/',
+            fields: ['fullName', 'email', 'phone', 'licenseNumber', 'vehicleType', 'vehicleNumber']
+        }
+    };
+
+    document.querySelectorAll('.register-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const role = this.getAttribute('data-role');
+            const data = registrationData[role];
+
+            if (data) {
+                showRegistrationModal(role, data);
+            }
+        });
+    });
+
+    // === MODAL FUNCTIONALITY ===
+
+    function showRegistrationModal(role, data) {
+        // Create modal backdrop
+        const backdrop = document.createElement('div');
+        backdrop.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+        backdrop.style.animation = 'fadeIn 0.3s ease';
+
+        // Create modal content
+        const modal = document.createElement('div');
+        modal.className = 'bg-white rounded-xl p-6 sm:p-8 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto';
+        modal.style.animation = 'slideUp 0.3s ease';
+
+        modal.innerHTML = `
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">${data.title}</h3>
+                <p class="text-gray-600">Join our platform and start your journey!</p>
+            </div>
+
+            <form id="registration-form" class="space-y-4">
+                ${generateFormFields(data.fields)}
+
+                <div class="flex gap-3 mt-6">
+                    <button type="button" id="cancel-btn" class="flex-1 py-3 px-4 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 py-3 px-4 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors">
+                        Register
+                    </button>
+                </div>
+            </form>
+        `;
+
+        backdrop.appendChild(modal);
+        document.body.appendChild(backdrop);
+
+        // Modal event handlers
+        document.getElementById('cancel-btn').addEventListener('click', () => {
+            closeModal(backdrop);
+        });
+
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) {
+                closeModal(backdrop);
+            }
+        });
+
+        document.getElementById('registration-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleRegistration(role, data, backdrop);
+        });
+
+        // Focus first input
+        const firstInput = modal.querySelector('input');
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 100);
+        }
+    }
+
+    function generateFormFields(fields) {
+        const fieldConfigs = {
+            fullName: { type: 'text', placeholder: 'Enter your full name', label: 'Full Name' },
+            restaurantName: { type: 'text', placeholder: 'Enter restaurant name', label: 'Restaurant Name' },
+            ownerName: { type: 'text', placeholder: 'Enter owner name', label: 'Owner Name' },
+            email: { type: 'email', placeholder: 'Enter your email', label: 'Email' },
+            phone: { type: 'tel', placeholder: 'Enter your phone number', label: 'Phone' },
+            password: { type: 'password', placeholder: 'Create a password', label: 'Password' },
+            address: { type: 'textarea', placeholder: 'Enter your address', label: 'Address' },
+            deliveryFee: { type: 'number', placeholder: 'Enter delivery fee ($)', label: 'Delivery Fee' },
+            licenseNumber: { type: 'text', placeholder: 'Enter license number', label: 'License Number' },
+            vehicleType: { type: 'select', options: ['2 Wheeler', '4 Wheeler', 'Bicycle'], label: 'Vehicle Type' },
+            vehicleNumber: { type: 'text', placeholder: 'Enter vehicle number', label: 'Vehicle Number' }
+        };
+
+        return fields.map(field => {
+            const config = fieldConfigs[field];
+            if (!config) return '';
+
+            if (config.type === 'textarea') {
+                return `
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium">${config.label}</label>
+                        <textarea name="${field}" placeholder="${config.placeholder}" rows="3" required
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all"></textarea>
+                    </div>
+                `;
+            } else if (config.type === 'select') {
+                return `
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium">${config.label}</label>
+                        <select name="${field}" required
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all">
+                            <option value="">Select ${config.label}</option>
+                            ${config.options.map(option => `<option value="${option}">${option}</option>`).join('')}
+                        </select>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium">${config.label}</label>
+                        <input type="${config.type}" name="${field}" placeholder="${config.placeholder}" required
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all">
+                    </div>
+                `;
+            }
+        }).join('');
+    }
+
+    function handleRegistration(role, data, backdrop) {
+        const form = document.getElementById('registration-form');
+        const formData = new FormData(form);
+        const registrationData = Object.fromEntries(formData.entries());
+
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Registering...';
+        submitBtn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+            closeModal(backdrop);
+            showToast(`${data.title.split(' ')[0]} registration successful! Welcome aboard!`, 'success');
+
+            // Log registration data (in real app, this would be sent to API)
+            console.log('Registration Data:', { role, ...registrationData });
+        }, 2000);
+    }
+
+    function closeModal(backdrop) {
+        backdrop.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            if (backdrop.parentNode) {
+                backdrop.parentNode.removeChild(backdrop);
+            }
+        }, 300);
+    }
+
+    // === TOAST NOTIFICATIONS ===
+
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        const colors = {
+            success: 'bg-green-500',
+            error: 'bg-red-500',
+            warning: 'bg-yellow-500',
+            info: 'bg-blue-500'
+        };
+
+        toast.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-sm`;
+        toast.style.animation = 'slideInRight 0.3s ease';
+        toast.textContent = message;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    // === ANIMATIONS CSS ===
+
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); }
+            to { transform: translateX(100%); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // === MOBILE OPTIMIZATIONS ===
+
+    // Touch handling for mobile
+    if ('ontouchstart' in window) {
+        document.querySelectorAll('.food-tag, .register-btn, .find-food-btn').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+
+            element.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+    }
+
+    // Responsive breakpoint detection
+    function checkMobile() {
+        return window.innerWidth < 1024;
+    }
+
+    // Keyboard navigation support
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.querySelector('.fixed.inset-0.bg-black');
+            if (modal) {
+                closeModal(modal);
+            }
+        }
+    });
+
+    // Initialize toast for demo
+    setTimeout(() => {
+        showToast('Welcome! Try searching for restaurants or register for an account.', 'info');
+    }, 1000);
+});
+</script>
+
+{% endblock %}

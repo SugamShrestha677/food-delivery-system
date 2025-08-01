@@ -1,0 +1,242 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* Header specific styles */
+.h-15 { height: 60px; }
+.h-12\.5 { height: 50px; }
+.h-21 { height: 83px; }
+.h-17\.5 { height: 70px; }
+.h-13 { height: 52px; }
+
+/* Custom styles for hero section */
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(218, 13, 13, 0.5)),
+              url("D:\python_3months\django\trialProject\backend\media\profile_photos\bg.jpg");
+  background-size: cover, 50px 50px;
+}
+
+.search-container {
+  background: #FFF;
+  border-radius: 30px;
+  padding: 32px 33px;
+}
+
+.location-dropdown, .search-input {
+  border: 0.5px solid #FF6600;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.location-dropdown:hover, .search-input:hover {
+  box-shadow: 0 2px 8px rgba(255, 102, 0, 0.15);
+}
+
+@media (max-width: 1023px) {
+  .search-container {
+    padding: 16px 20px;
+    border-radius: 20px;
+  }
+
+  .location-dropdown, .search-input {
+    padding: 1px;
+    border-radius: 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-container {
+    padding: 12px 16px;
+    border-radius: 16px;
+  }
+
+  .location-dropdown, .search-input {
+    padding: 0px;
+    border-radius: 12px;
+    font-size: 13px;
+    min-height: 44px; /* Touch-friendly minimum */
+  }
+}
+
+.find-food-btn {
+  background: #FF6600;
+  border-radius: 7px;
+  color: #FCFAF7;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-height: 44px; /* Touch-friendly */
+}
+
+.find-food-btn:hover {
+  background: #e55a00;
+  transform: translateY(-1px);
+}
+
+.find-food-btn:active {
+  transform: translateY(0);
+}
+
+.food-tag {
+  background: #F5EDE5;
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: #000;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  min-height: 36px;
+}
+
+.food-tag:hover {
+  background: #f0e1d1;
+  transform: translateY(-1px);
+}
+
+.food-tag:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 640px) {
+  .find-food-btn {
+    border-radius: 8px;
+    min-height: 48px;
+  }
+
+  .food-tag {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    min-height: 40px;
+  }
+}
+
+.card-gradient-blue {
+  background: linear-gradient(90deg, #5EA2F9 0%, #2A69EC 100%);
+}
+
+.card-gradient-green {
+  background: linear-gradient(90deg, #46D6A1 0%, #06976A 100%);
+}
+
+.card-gradient-orange {
+  background: linear-gradient(90deg, #FABE23 0%, #D97908 100%);
+}
+
+.btn-gradient-blue {
+  background: linear-gradient(90deg, #5EA2F9 0%, #2A69EC 100%);
+}
+
+.btn-gradient-green {
+  background: linear-gradient(90deg, #46D6A1 0%, #06976A 100%);
+}
+
+.btn-gradient-orange {
+  background: linear-gradient(90deg, #FABE23 0%, #D97908 100%);
+}
+
+/* Information Section Styles */
+.icon-container-size {
+  width: 88px;
+  height: 88px;
+}
+
+@media (max-width: 640px) {
+  .icon-container-size {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Custom background colors for icons */
+.icon-bg-blue {
+  background-color: #DBEAFE;
+}
+
+.icon-bg-green {
+  background-color: #D1FAE5;
+}
+
+.icon-bg-yellow {
+  background-color: #FEF3C7;
+}
+
+/* Custom line height for tight spacing */
+.leading-none {
+  line-height: 1;
+}
+
+.leading-tight {
+  line-height: 1.25;
+}
+
+.leading-normal {
+  line-height: 1.5;
+}
+
+/* Letter spacing utilities */
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+/* Custom max-width utilities */
+.max-w-xs {
+  max-width: 20rem;
+}
+
+.max-w-6xl {
+  max-width: 72rem;
+}
+
+/* App store button hover effects */
+.app-store-btn {
+  transition: all 0.2s ease;
+}
+
+.app-store-btn:hover {
+  background-color: #1f2937;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.app-store-btn:active {
+  transform: translateY(0);
+}
+
+/* Phone mockup gradient */
+.phone-mockup {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+}
+
+/* Responsive adjustments for information sections */
+@media (max-width: 1024px) {
+  .gap-20 {
+    gap: 3rem;
+  }
+
+  .gap-24 {
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .gap-20 {
+    gap: 2.5rem;
+  }
+
+  .gap-24 {
+    gap: 3rem;
+  }
+
+  .w-22 {
+    width: 80px;
+  }
+
+  .h-22 {
+    height: 80px;
+  }
+}

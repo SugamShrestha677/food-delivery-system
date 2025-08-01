@@ -1,0 +1,588 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login - FoodExpress{% endblock %}
+
+{% block content %}
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Inter:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+<meta name="csrf-token" content="{{ csrf_token }}">
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f97316',
+                        secondary: '#ea580c',
+                        accent: '#ffedd5',
+                        dark: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+
+<div class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-6xl w-full">
+            <!-- Header -->
+            <header class="text-center mb-10">
+                <div class="flex justify-center mb-4">
+                    <div class="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center">
+                        <i class="fas fa-utensils text-white text-2xl"></i>
+                    </div>
+                </div>
+                <h1 class="text-4xl font-bold text-gray-800">Tasty<span class="text-orange-500">Bites</span> Restaurant Portal</h1>
+                <p class="text-gray-600 mt-2">Manage your restaurant on our food delivery platform</p>
+            </header>
+    
+            <!-- Main Content -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Left Side - Features -->
+                <div class="w-full lg:w-2/5">
+                    <div class="bg-white rounded-2xl p-6 card">
+                        <button class="py-2 rounded-lg border border-gray-300 flex items-center justify-center text-primary hover:border-dark hover:text-dark text-lg w-24 mb-5">
+                                    <i class="ri-arrow-left-line"></i>
+                                    <a href="/">Back</a>
+                </button>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Why Join TastyBites?</h2>
+                        
+                        <div class="space-y-5">
+                            <div class="feature-card p-5 bg-orange-50 rounded-xl border border-orange-100 transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-chart-line text-orange-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-1">Increase Your Revenue</h3>
+                                        <p class="text-gray-600">Reach thousands of new customers and increase your sales by 40% on average.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card p-5 bg-orange-50 rounded-xl border border-orange-100 transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-cogs text-orange-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-1">Easy Management</h3>
+                                        <p class="text-gray-600">Powerful dashboard to manage orders, menu, and track performance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card p-5 bg-orange-50 rounded-xl border border-orange-100 transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-truck text-orange-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-1">Reliable Delivery</h3>
+                                        <p class="text-gray-600">Our dedicated delivery fleet ensures your food arrives fresh and on time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card p-5 bg-orange-50 rounded-xl border border-orange-100 transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-headset text-orange-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800 mb-1">24/7 Support</h3>
+                                        <p class="text-gray-600">Dedicated account manager and support team to help you succeed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 bg-orange-100 p-5 rounded-xl">
+                            <h3 class="font-bold text-lg text-gray-800 mb-2">Restaurant Owner Testimonial</h3>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-orange-200 flex items-center justify-center mr-3">
+                                    <i class="fas fa-quote-left text-orange-600"></i>
+                                </div>
+                                <p class="text-gray-700 italic">"Since joining TastyBites, our sales have increased by 65% and we've reached new customer segments we never thought possible. The platform is intuitive and their support is fantastic!"</p>
+                            </div>
+                            <div class="mt-3 flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 mr-3"></div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Maria Rodriguez</p>
+                                    <p class="text-sm text-gray-600">Owner, La Bella Cucina</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Forms -->
+                <div class="w-full lg:w-3/5">
+                    <div class="bg-white rounded-2xl overflow-hidden card">
+                        <!-- Tabs -->
+                        <div class="flex border-b border-gray-200">
+                            <button id="login-tab" class="flex-1 py-5 px-4 text-center font-medium text-lg text-primary tab-active">Restaurant Login</button>
+                            <button id="signup-tab" class="flex-1 py-5 px-4 text-center font-medium text-lg text-gray-500">Restaurant Signup</button> 
+                        </div>
+                        
+                        <!-- Login Form -->
+                        <div class="p-8" id="login-form">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome back!</h2>
+                            <p class="text-gray-600 mb-8">Sign in to manage your restaurant</p>
+                            
+                            <form class="space-y-5" id="login-form">
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium" for="username">Username</label>
+                                    <div class="relative">
+                                        <input 
+                                            type="text"
+                                            id="username"
+                                            class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                            placeholder="Username"
+                                            name="username"
+                                            required
+                                        >
+                                        {% comment %} <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i> {% endcomment %}
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium" for="login-password">Password</label>
+                                    <div class="relative">
+                                        <input 
+                                            type="password" 
+                                            id="login-password"
+                                            class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                            placeholder="••••••••"
+                                            name="password"
+                                            required
+                                        >
+                                        <button type="button" id="toggle-password" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                <i class="far fa-eye"></i>
+                            </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="remember" class="h-4 w-4 text-primary border-gray-300 rounded">
+                                        <label for="remember" class="ml-2 text-gray-700">Remember me</label>
+                                    </div>
+                                    <a href="#" class="text-primary hover:text-orange-800 font-medium">Forgot Password?</a>
+                                </div>
+                                    <button type="submit" class="w-full py-4 btn-primary text-white font-bold rounded-lg text-lg">
+                                        Login to Dashboard
+                                    </button>
+                            </form>
+                            
+                            <div class="mt-8 text-center">
+                                <p class="text-gray-600">Don't have an account? <button id="switch-to-signup" class="text-primary font-medium hover:text-orange-800">Sign up your restaurant</button></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Signup Form (Hidden) -->
+                        <div id="signup-form" class="p-8 hidden">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-2">Register Your Restaurant</h2>
+                            <p class="text-gray-600 mb-8">Join our platform and reach thousands of customers</p>
+                            
+                            <form class="space-y-5" id="signup-forms">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2 font-medium" for="restaurant-name">Restaurant Name</label>
+                                        <div class="relative">
+                                            <input 
+                                                type="text" 
+                                                id="restaurant-name"
+                                                class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                                placeholder="       Restaurant Name"
+                                                required
+                                            >
+                                            <i class="fas fa-store absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2 mt-1.5"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div>
+                                        <label class="block text-gray-700 mb-2 font-medium" for="cuisine-type">Cuisine Type</label>
+                                        <div class="relative">
+                                            <select id="cuisine-type" class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none appearance-none">
+                                                <option value="">       Select Cuisine</option>
+                                                <option value="italian">Italian</option>
+                                                <option value="mexican">Mexican</option>
+                                                <option value="indian">Indian</option>
+                                                <option value="chinese">Chinese</option>
+                                                <option value="american">American</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium" for="owner-name">Owner Name</label>
+                                    <div class="relative">
+                                        <input 
+                                            type="text" 
+                                            id="owner-name"
+                                            class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                            placeholder="       Full Name"
+                                            required
+                                        >
+                                        <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2 mt-1.5"></i>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium" for="signup-username">Username</label>
+                                    <div class="relative">
+                                        <input 
+                                            type="text" 
+                                            id="signup-username"
+                                            class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                            placeholder="       Choose a username"
+                                            required
+                                        >
+                                        <i class="fas fa-user-tag absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2 mt-1.5"></i>
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2 font-medium" for="signup-email">Email Address</label>
+                                        <div class="relative">
+                                            <input 
+                                                type="email" 
+                                                id="signup-email"
+                                                class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                                placeholder="       owner@restaurant.com"
+                                                required
+                                            >
+                                            <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2 mt-1.5"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-gray-700 mb-2 font-medium" for="phone">Phone Number</label>
+                                        <div class="relative">
+                                            <input 
+                                                type="tel" 
+                                                id="phone"
+                                                class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                                placeholder="       (123) 456-7890"
+                                                required
+                                            >
+                                            <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2 mt-1.5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2 font-medium" for="signup-password">Password</label>
+                                        <div class="relative">
+                                            <input 
+                                                type="password" 
+                                                id="signup-password"
+                                                class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                                placeholder="••••••••"
+                                                required
+                                            >
+                                            <button type="button" id="toggle-password" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                <i class="far fa-eye"></i>
+                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-gray-700 mb-2 font-medium" for="signup-confirm">Confirm Password</label>
+                                        <div class="relative">
+                                            <input 
+                                                type="password" 
+                                                id="signup-confirm"
+                                                class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                                placeholder="••••••••"
+                                                required
+                                            >
+                                            <button type="button" id="toggle-password" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                <i class="far fa-eye"></i>
+                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium" for="address">Restaurant Address</label>
+                                    <div class="relative">
+                                        <input 
+                                            type="text" 
+                                            id="address"
+                                            class="w-full p-4 input-field rounded-lg border border-gray-300 focus:outline-none"
+                                            placeholder="       Full Address"
+                                            required
+                                        >
+                                        <i class="fas fa-map-marker-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ml-2 mt-1.5"></i>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium" for="restaurant-logo">Restaurant Logo</label>
+                                    <input 
+                                        type="file" 
+                                        id="restaurant-logo" 
+                                        name="logo" 
+                                        accept="image/*"
+                                        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none"
+                                    >
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <input type="checkbox" id="terms" class="h-5 w-5 text-primary border-gray-300 rounded mt-1" required>
+                                    <label for="terms" class="ml-2 text-gray-700">I agree to the <a href="#" class="text-primary hover:underline">Terms & Conditions</a> and <a href="#" class="text-primary hover:underline">Restaurant Agreement</a></label>
+                                </div>
+                                
+                                <button type="submit" class="w-full py-4 btn-primary text-white font-bold rounded-lg text-lg">
+                                    Register Restaurant
+                                </button>
+                            </form>
+                            
+                            <div class="mt-8 text-center">
+                                <p class="text-gray-600">Already have an account? <button id="switch-to-login" class="text-primary font-medium hover:text-orange-800">Login here</button></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-white rounded-2xl p-6 card">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">How It Works</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-orange-50 p-5 rounded-xl text-center">
+                                <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-white font-bold">1</span>
+                                </div>
+                                <h3 class="font-bold text-gray-800 mb-2">Register Your Restaurant</h3>
+                                <p class="text-gray-600 text-sm">Complete our simple onboarding process</p>
+                            </div>
+                            
+                            <div class="bg-orange-50 p-5 rounded-xl text-center">
+                                <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-white font-bold">2</span>
+                                </div>
+                                <h3 class="font-bold text-gray-800 mb-2">Set Up Your Menu</h3>
+                                <p class="text-gray-600 text-sm">Add your menu items with photos and prices</p>
+                            </div>
+                            
+                            <div class="bg-orange-50 p-5 rounded-xl text-center">
+                                <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-white font-bold">3</span>
+                                </div>
+                                <h3 class="font-bold text-gray-800 mb-2">Start Receiving Orders</h3>
+                                <p class="text-gray-600 text-sm">Get orders from customers in your area</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer class="mt-12 text-center text-gray-600 py-6">
+                <p>© 2023 Logo Entertainment / Logo Business. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-orange-500"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-600 hover:text-orange-500"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-600 hover:text-orange-500"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-600 hover:text-orange-500"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </footer>
+        </div>
+
+</div>
+
+<script>
+// Form toggle functionality
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const switchToLogin = document.getElementById('switch-to-login');
+        
+        function showLogin() {
+            loginTab.classList.add('text-primary', 'tab-active');
+            signupTab.classList.remove('text-primary', 'tab-active');
+            signupTab.classList.add('text-gray-500');
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+        }
+        
+        function showSignup() {
+            signupTab.classList.add('text-primary', 'tab-active');
+            loginTab.classList.remove('text-primary', 'tab-active');
+            loginTab.classList.add('text-gray-500');
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+        }
+        
+        loginTab.addEventListener('click', showLogin);
+        signupTab.addEventListener('click', showSignup);
+        switchToSignup.addEventListener('click', showSignup);
+        switchToLogin.addEventListener('click', showLogin);
+        
+        // Form validation
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                if(form.id === 'login-form') {
+                    const email = document.getElementById('login-email').value;
+                    const password = document.getElementById('login-password').value;
+                    
+                    if(email && password) {
+                        // Simulate login process
+                        alert(`Restaurant login successful!\nEmail: ${email}`);
+                        // In a real app, you would make an API call here
+                    }
+                } else {
+                    const restaurantName = document.getElementById('restaurant-name').value;
+                    const ownerName = document.getElementById('owner-name').value;
+                    const email = document.getElementById('signup-email').value;
+                    const password = document.getElementById('signup-password').value;
+                    const confirm = document.getElementById('signup-confirm').value;
+                    
+                    if(password !== confirm) {
+                        alert("Passwords don't match!");
+                        return;
+                    }
+                    
+                    if(restaurantName && ownerName && email && password) {
+                        // Simulate signup process
+                        alert(`Restaurant registered successfully!\nName: ${restaurantName}\nOwner: ${ownerName}\nEmail: ${email}`);
+                        // In a real app, you would make an API call here
+                    }
+                }
+            });
+        });
+
+
+
+
+
+
+    // Function to extract CSRF token from cookies
+    function getCSRFToken() {
+        let cookieValue = null;
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith('csrftoken=')) {
+                cookieValue = cookie.substring('csrftoken='.length);
+                break;
+            }
+        }
+        return cookieValue;
+    }
+
+ document.querySelector('#signup-forms').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = {
+        restaurant_name: document.getElementById('restaurant-name').value,
+        username: document.getElementById('signup-username').value,
+        password: document.getElementById('signup-password').value,
+        email: document.getElementById('signup-email').value,
+        address: document.getElementById('address').value,
+        contact: document.getElementById('phone').value,
+        cuisine_type: document.getElementById('cuisine-type').value,
+        delivery_fees: 0,  // or from input field
+        role: "restaurant_owner"
+    };
+    try {
+    const csrfToken = getCSRFToken();
+
+    const response = await fetch('http://127.0.0.1:8000/api/restaurant/register/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        credentials: 'include',
+        body: JSON.stringify(formData)
+    });
+
+    const text = await response.text(); // Only one read
+
+    let data = {};
+    try {
+        data = JSON.parse(text);
+    } catch (err) {
+        console.warn('Response was not JSON:', text);
+    }
+
+    if (response.ok) {
+        alert('Registration successful! Please login.');
+        loginTab?.click();  // Use optional chaining in case loginTab is undefined
+    } else {
+        alert(`Error: ${data.detail || JSON.stringify(data)}`);
+    }
+
+} catch (error) {
+    alert('An error occurred: ' + error.message);
+}
+
+});
+
+
+
+
+
+
+
+// login form 
+document.getElementById("login-form").addEventListener("submit", async function (e) {
+    e.preventDefault(); // prevent form from submitting the normal way
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("login-password").value; // Fixed here
+
+    const response = await fetch("http://localhost:8000/api/auth/login/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("access_token", data.access);
+        localStorage.setItem("refresh_token", data.refresh);
+        console.log("Login successful. Redirecting now...");
+
+        window.location.href = "/restaurant/dashboard/";
+    } else {
+        alert("Login failed. Please check your credentials.");
+    }
+});
+
+
+
+
+
+
+
+ // Password visibility toggle
+        const togglePassword = document.getElementById('toggle-password');
+        var passwordInput = document.getElementById('login-password');
+        
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+</script>
+
+{% endblock %}
+
+
+

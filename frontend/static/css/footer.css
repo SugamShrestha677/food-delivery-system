@@ -1,0 +1,121 @@
+/* Footer Component Custom Styles */
+
+.footer-section {
+    background-color: #111827;
+    font-feature-settings: 'dlig' on;
+}
+
+.footer-content {
+    padding-left: 227px;
+    padding-right: 227px;
+    margin-bottom: 210px;
+}
+
+.tagline {
+    width: 283px;
+}
+
+.copyright-text {
+    width: 366px;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    .footer-content {
+        padding-left: 40px;
+        padding-right: 40px;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-bottom: 120px;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-content {
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 20px;
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+    
+    .footer-logo-section,
+    .footer-links-section,
+    .footer-legal-section,
+    .footer-contact-section {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .section-title {
+        margin-bottom: 20px;
+    }
+    
+    .links-list,
+    .legal-links,
+    .contact-info {
+        align-items: center;
+    }
+    
+    .copyright-text {
+        width: 100%;
+        max-width: 366px;
+    }
+}
+
+/* Font and typography styles */
+.logo-text,
+.section-title,
+.link-text,
+.contact-text,
+.copyright-text,
+.tagline {
+    font-family: 'Inter', -apple-system, 'Roboto', 'Helvetica', sans-serif;
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 23px;
+}
+
+.section-title {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+}
+
+.link-text,
+.contact-text,
+.copyright-text,
+.tagline {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+/* Color overrides for exact matching */
+.footer-section {
+    background-color: #111827 !important;
+}
+
+.logo-text {
+    color: #FFF !important;
+}
+
+.section-title {
+    color: #FFF !important;
+}
+
+.tagline,
+.link-text,
+.contact-text,
+.copyright-text {
+    color: #DCECFA !important;
+}
+
+.link-text:hover,
+.contact-text:hover {
+    color: #FFF !important;
+}

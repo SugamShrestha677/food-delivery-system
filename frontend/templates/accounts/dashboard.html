@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<body class="font-sans bg-gray-50">
+    <!-- Header -->
+      {% include "accounts/header.html" %}
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Restaurant-quality meals in 30 mins</h1>
+            <p class="text-xl mb-10">What is your meal?</p>
+            
+            <div class="max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-10">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-2xl font-bold text-secondary mb-2">Sweet snacks</h3>
+                        <div class="flex space-x-4">
+                            <div class="stats-card bg-primary p-4 rounded-lg">
+                                <p class="text-lg font-medium">Sweet snacks</p>
+                                <p class="text-2xl font-bold">1,000 guests</p>
+                            </div>
+                            <div class="stats-card bg-secondary p-4 rounded-lg">
+                                <p class="text-lg font-medium">Sweet snacks</p>
+                                <p class="text-2xl font-bold">2,000 guests</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-secondary hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition">
+                        Order Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Why choose us?</h2>
+            
+            <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md mb-12">
+                <div class="flex items-center">
+                    <div class="bg-primary/10 p-3 rounded-full mr-4">
+                        <i class="fas fa-star text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Avoid a new restaurant to celebrate.</h3>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fas fa-truck text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Test Journey</h3>
+                    </div>
+                    <p class="text-gray-600">We were looking over to the service.</p>
+                </div>
+                
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fas fa-utensils text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Quality Food</h3>
+                    </div>
+                    <p class="text-gray-600">Because it’s quite small and too much!</p>
+                </div>
+                
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fas fa-heart text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Quality Food</h3>
+                    </div>
+                    <p class="text-gray-600">Because it’s always nice for us again.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Restaurants -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Featured Restaurants</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="restaurant-table w-full bg-white rounded-xl shadow-md overflow-hidden">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th class="py-4 px-6 text-left">Name</th>
+                            <th class="py-4 px-6 text-left">Value from Home</th>
+                            <th class="py-4 px-6 text-left">Weight Prices</th>
+                            <th class="py-4 px-6 text-left">Range Averages</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-4 px-6 border-b">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+                                    <span class="font-medium">Login</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 border-b">Value from Home</td>
+                            <td class="py-4 px-6 border-b">Login</td>
+                            <td class="py-4 px-6 border-b">Service</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 border-b">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+                                    <span class="font-medium">Taking a business by customers</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 border-b">About 5</td>
+                            <td class="py-4 px-6 border-b">Price Policy</td>
+                            <td class="py-4 px-6 border-b">Last info@localhost/user</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 border-b"></td>
+                            <td class="py-4 px-6 border-b">Amount</td>
+                            <td class="py-4 px-6 border-b">Value from Home</td>
+                            <td class="py-4 px-6 border-b">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                                    Very Important
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">Amount</td>
+                            <td class="py-4 px-6">Value from Home</td>
+                            <td class="py-4 px-6"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>© Logo Entertainment / Logo Business</p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-primary transition">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-primary transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-primary transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-primary transition">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Stats counter animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stats counters
+            const stats = document.querySelectorAll('.stats-card p:last-child');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent.replace(/,/g, ''));
+                let current = 0;
+                
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, 20);
+            });
+            
+            // Add table row hover effects
+            const tableRows = document.querySelectorAll('.restaurant-table tr');
+            tableRows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.style.transform = 'scale(1.01)';
+                    row.style.transition = 'all 0.3s ease';
+                });
+                
+                row.addEventListener('mouseleave', () => {
+                    row.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

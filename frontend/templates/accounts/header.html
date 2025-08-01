@@ -1,0 +1,48 @@
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f97316',
+                        secondary: '#ea580c',
+                        accent: '#ffedd5',
+                        dark: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+
+<header class="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="bg-primary w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                    <i class="fas fa-utensils text-white text-xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-dark">Food<span class="text-primary">Express</span></h1>
+            </div>
+            
+            <nav class="hidden md:block">
+                <ul class="flex space-x-18">
+                    <li><a href="/" class="text-dark text-2xl hover:text-primary font-medium">Home</a></li>
+                    <li><a href="/restaurant/" class="text-dark text-2xl hover:text-primary font-medium">Restaurants</a></li>
+                    <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">About us</a></li>
+                    <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#SignIn">
+                    <button class="hidden md:block bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition">
+                        Sign In
+                    </button>
+
+                </a>
+                <button class="md:hidden text-dark">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>

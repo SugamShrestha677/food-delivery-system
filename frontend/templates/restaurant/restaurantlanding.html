@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Discover Amazing Restaurants - Food Delivery{% endblock %}
+
+{% block content %}
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f97316',
+                        secondary: '#ea580c',
+                        accent: '#ffedd5',
+                        dark: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+  .active-link {
+ color: #f97316;
+}
+</style>
+<header class="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="bg-primary w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                    <i class="fas fa-utensils text-white text-xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-dark">Food<span class="text-primary">Express</span></h1>
+            </div>
+            
+            <nav class="hidden md:block">
+                <ul class="flex space-x-18">
+                    <li><a href="/" class="text-dark text-2xl hover:text-primary font-medium">Home</a></li>
+                    <li><a href="/restaurant/" class="text-dark text-2xl hover:text-primary font-medium active-link">Restaurants</a></li>
+                    <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">About us</a></li>
+                    <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <a href="/restaurant/signin/">
+                    <button class="hidden md:block bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition">
+                        Sign Up
+                    </button>
+
+                </a>
+                <button class="md:hidden text-dark">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+<!-- Hero Section with Background -->
+<section class="w-full h-screen bg-cover bg-center bg-no-repeat relative flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8" 
+         style="background-image: linear-gradient(0deg, rgba(25, 24, 24, 0.65) 0%, rgba(25, 24, 24, 0.65) 100%), url('https://api.builder.io/api/v1/image/assets/TEMP/6f1c5c889011f8bf8438731f2d2d4e46af5d0f98?width=3840');">
+  
+  <!-- Main Content Container -->
+  <div class="w-full max-w-5xl mx-auto relative mb-8 lg:mb-32">
+    
+    <!-- Hero Text -->
+    <div class="text-center mb-8 lg:mb-24">
+      <h1 class="text-white text-center mb-10 text-4xl md:text-5xl lg:text-7xl font-medium leading-tight lg:leading-[85px]" style="font-family: 'Fira Sans', sans-serif;">
+        <div>Discover Amazing</div>
+        <div class="text-primary">Restaurants</div>
+      </h1>
+      <p class="text-white text-lg sm:text-xl lg:text-2xl font-normal leading-relaxed max-w-4xl mx-auto" style="font-family: 'Inter', sans-serif;">
+        Find and order from the best restaurants
+      </p>
+    </div>
+
+    <!-- Search Container -->
+    <div class="bg-white rounded-3xl p-6 lg:p-8 relative max-w-4xl mx-auto border border-gray-600">
+      
+      <!-- Desktop Layout -->
+      <div class="hidden lg:block">
+        <!-- Location Dropdown -->
+        <div class="absolute left-8 top-2 flex items-center justify-center w-36 h-12 px-3 py-2 border border-primary rounded-xl cursor-pointer hover:shadow-md transition-shadow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+            <path d="M10.0001 9.58341C9.44755 9.58341 8.91764 9.36392 8.52694 8.97322C8.13624 8.58252 7.91675 8.05262 7.91675 7.50008C7.91675 6.94755 8.13624 6.41764 8.52694 6.02694C8.91764 5.63624 9.44755 5.41675 10.0001 5.41675C10.5526 5.41675 11.0825 5.63624 11.4732 6.02694C11.8639 6.41764 12.0834 6.94755 12.0834 7.50008C12.0834 7.77367 12.0295 8.04458 11.9248 8.29734C11.8201 8.5501 11.6667 8.77977 11.4732 8.97322C11.2798 9.16668 11.0501 9.32013 10.7973 9.42483C10.5446 9.52953 10.2737 9.58341 10.0001 9.58341ZM10.0001 1.66675C8.45299 1.66675 6.96925 2.28133 5.87529 3.37529C4.78133 4.46925 4.16675 5.95299 4.16675 7.50008C4.16675 11.8751 10.0001 18.3334 10.0001 18.3334C10.0001 18.3334 15.8334 11.8751 15.8334 7.50008C15.8334 5.95299 15.2188 4.46925 14.1249 3.37529C13.0309 2.28133 11.5472 1.66675 10.0001 1.66675Z" fill="#757575"/>
+          </svg>
+          <span class="text-gray-600 text-center font-medium mx-2" style="font-family: 'Space Grotesk', sans-serif;">New York</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.99992 5.83325L9.99992 10.8333L14.9999 5.83325L16.6666 7.49992L9.99992 14.1666L3.33325 7.49992L4.99992 5.83325Z" fill="#757575"/>
+          </svg>
+        </div>
+
+        <!-- Search Input -->
+        <div class="absolute left-60 top-2 flex items-center w-80 h-12 px-3 py-2 border border-primary rounded-xl">
+          <svg width="24" height="24" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mr-3">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 2.5C9.6446 2.50012 8.30887 2.82436 7.10427 3.44569C5.89966 4.06702 4.8611 4.96742 4.07525 6.07175C3.28939 7.17609 2.77902 8.45235 2.58672 9.79404C2.39442 11.1357 2.52576 12.504 2.96979 13.7846C3.41382 15.0652 4.15766 16.2211 5.13925 17.1557C6.12084 18.0904 7.31171 18.7768 8.61252 19.1576C9.91333 19.5384 11.2864 19.6026 12.617 19.3449C13.9477 19.0872 15.1975 18.515 16.262 17.676L19.914 21.328C20.1026 21.5102 20.3552 21.611 20.6174 21.6087C20.8796 21.6064 21.1304 21.5012 21.3158 21.3158C21.5012 21.1304 21.6064 20.8796 21.6087 20.6174C21.611 20.3552 21.5102 20.1026 21.328 19.914L17.676 16.262C18.664 15.0086 19.2792 13.5024 19.4511 11.9157C19.623 10.3291 19.3448 8.72602 18.6482 7.29009C17.9517 5.85417 16.8649 4.64336 15.5123 3.79623C14.1597 2.94911 12.596 2.49989 11 2.5ZM4.50001 11C4.50001 9.27609 5.18483 7.62279 6.40382 6.40381C7.6228 5.18482 9.2761 4.5 11 4.5C12.7239 4.5 14.3772 5.18482 15.5962 6.40381C16.8152 7.62279 17.5 9.27609 17.5 11C17.5 12.7239 16.8152 14.3772 15.5962 15.5962C14.3772 16.8152 12.7239 17.5 11 17.5C9.2761 17.5 7.6228 16.8152 6.40382 15.5962C5.18483 14.3772 4.50001 12.7239 4.50001 11Z" fill="#757575"/>
+          </svg>
+          <input type="text" placeholder="Search for restaurants" class="flex-1 bg-transparent outline-none text-yellow-800 font-medium placeholder-yellow-800" style="font-family: 'Space Grotesk', sans-serif;">
+        </div>
+
+        <!-- Find Food Button -->
+        <button class="absolute right-8 top-2 flex items-center justify-center w-48 h-12 bg-primary text-white rounded-lg font-semibold text-xl hover:bg-orange-600 transition-colors" style="font-family: 'Inter', sans-serif;">
+          Find Restaurants
+        </button>
+
+        <!-- Food Category Tags -->
+        <div class="absolute left-48 top-32 flex gap-3 justify-center">
+          <button class="food-tag px-4 py-2 rounded-xl text-black text-center cursor-pointer hover:shadow-md transition-all hover:-translate-y-1" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Pizza</button>
+          <button class="food-tag px-4 py-2 rounded-xl text-black text-center cursor-pointer hover:shadow-md transition-all hover:-translate-y-1" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Burger</button>
+          <button class="food-tag px-4 py-2 rounded-xl text-black text-center cursor-pointer hover:shadow-md transition-all hover:-translate-y-1" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Sushi</button>
+          <button class="food-tag px-4 py-2 rounded-xl text-black text-center cursor-pointer hover:shadow-md transition-all hover:-translate-y-1" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Chinese</button>
+          <button class="food-tag px-4 py-2 rounded-xl text-black text-center cursor-pointer hover:shadow-md transition-all hover:-translate-y-1" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Italian</button>
+        </div>
+      </div>
+
+      <!-- Mobile Layout -->
+      <div class="lg:hidden space-y-4">
+        <!-- Location Dropdown -->
+        <div class="flex items-center justify-center w-full h-12 px-3 py-2 border border-primary rounded-xl cursor-pointer">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+            <path d="M10.0001 9.58341C9.44755 9.58341 8.91764 9.36392 8.52694 8.97322C8.13624 8.58252 7.91675 8.05262 7.91675 7.50008C7.91675 6.94755 8.13624 6.41764 8.52694 6.02694C8.91764 5.63624 9.44755 5.41675 10.0001 5.41675C10.5526 5.41675 11.0825 5.63624 11.4732 6.02694C11.8639 6.41764 12.0834 6.94755 12.0834 7.50008C12.0834 7.77367 12.0295 8.04458 11.9248 8.29734C11.8201 8.5501 11.6667 8.77977 11.4732 8.97322C11.2798 9.16668 11.0501 9.32013 10.7973 9.42483C10.5446 9.52953 10.2737 9.58341 10.0001 9.58341ZM10.0001 1.66675C8.45299 1.66675 6.96925 2.28133 5.87529 3.37529C4.78133 4.46925 4.16675 5.95299 4.16675 7.50008C4.16675 11.8751 10.0001 18.3334 10.0001 18.3334C10.0001 18.3334 15.8334 11.8751 15.8334 7.50008C15.8334 5.95299 15.2188 4.46925 14.1249 3.37529C13.0309 2.28133 11.5472 1.66675 10.0001 1.66675Z" fill="#757575"/>
+          </svg>
+          <span class="text-gray-600 font-medium mx-2" style="font-family: 'Space Grotesk', sans-serif;">New York</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.99992 5.83325L9.99992 10.8333L14.9999 5.83325L16.6666 7.49992L9.99992 14.1666L3.33325 7.49992L4.99992 5.83325Z" fill="#757575"/>
+          </svg>
+        </div>
+
+        <!-- Search Input -->
+        <div class="flex items-center w-full h-12 px-3 py-2 border border-primary rounded-xl">
+          <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mr-3">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11 2.5C9.6446 2.50012 8.30887 2.82436 7.10427 3.44569C5.89966 4.06702 4.8611 4.96742 4.07525 6.07175C3.28939 7.17609 2.77902 8.45235 2.58672 9.79404C2.39442 11.1357 2.52576 12.504 2.96979 13.7846C3.41382 15.0652 4.15766 16.2211 5.13925 17.1557C6.12084 18.0904 7.31171 18.7768 8.61252 19.1576C9.91333 19.5384 11.2864 19.6026 12.617 19.3449C13.9477 19.0872 15.1975 18.515 16.262 17.676L19.914 21.328C20.1026 21.5102 20.3552 21.611 20.6174 21.6087C20.8796 21.6064 21.1304 21.5012 21.3158 21.3158C21.5012 21.1304 21.6064 20.8796 21.6087 20.6174C21.611 20.3552 21.5102 20.1026 21.328 19.914L17.676 16.262C18.664 15.0086 19.2792 13.5024 19.4511 11.9157C19.623 10.3291 19.3448 8.72602 18.6482 7.29009C17.9517 5.85417 16.8649 4.64336 15.5123 3.79623C14.1597 2.94911 12.596 2.49989 11 2.5ZM4.50001 11C4.50001 9.27609 5.18483 7.62279 6.40382 6.40381C7.6228 5.18482 9.2761 4.5 11 4.5C12.7239 4.5 14.3772 5.18482 15.5962 6.40381C16.8152 7.62279 17.5 9.27609 17.5 11C17.5 12.7239 16.8152 14.3772 15.5962 15.5962C14.3772 16.8152 12.7239 17.5 11 17.5C9.2761 17.5 7.6228 16.8152 6.40382 15.5962C5.18483 14.3772 4.50001 12.7239 4.50001 11Z" fill="#757575"/>
+          </svg>
+          <input type="text" placeholder="Search for restaurants" class="flex-1 bg-transparent outline-none text-yellow-800 font-medium placeholder-yellow-800" style="font-family: 'Space Grotesk', sans-serif;">
+        </div>
+
+        <!-- Find Food Button -->
+        <button class="w-full h-12 bg-primary text-white rounded-lg font-semibold text-lg hover:bg-orange-600 transition-colors" style="font-family: 'Inter', sans-serif;">
+          Find Food
+        </button>
+
+        <!-- Food Category Tags -->
+        <div class="flex flex-wrap gap-2 justify-center pt-2">
+          <button class="px-3 py-2 rounded-lg text-black text-sm cursor-pointer hover:shadow-md transition-all" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Pizza</button>
+          <button class="px-3 py-2 rounded-lg text-black text-sm cursor-pointer hover:shadow-md transition-all" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Burger</button>
+          <button class="px-3 py-2 rounded-lg text-black text-sm cursor-pointer hover:shadow-md transition-all" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Sushi</button>
+          <button class="px-3 py-2 rounded-lg text-black text-sm cursor-pointer hover:shadow-md transition-all" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Chinese</button>
+          <button class="px-3 py-2 rounded-lg text-black text-sm cursor-pointer hover:shadow-md transition-all" style="background-color: #F5EDE5; font-family: 'Inter', sans-serif; font-weight: 300;">Italian</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Join Community Section -->
+
+
+  <div class="flex flex-col justify-center items-center mt-1.5">
+    <h2 class="text-white text-xl lg:text-2xl font-semibold mb-6 lg:mb-8" style="font-family: 'Inter', sans-serif;">
+      Join our community as:
+    </h2>
+    <div class="flex flex-col lg:flex-row gap-4 lg:gap-6 items-center justify-center">
+      <!-- Customer Button -->
+      <a href="{% url 'customer_signin' %}"">
+
+        <button class="flex items-center justify-center h-14 lg:h-16 px-6 lg:px-8 rounded-3xl border border-white bg-transparent text-white hover:bg-white hover:bg-opacity-10 transition-all" style="font-family: 'Inter', sans-serif;">
+        <!-- SVG + text -->
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+            <path d="M15 5C16.3261 5 17.5979 5.52678 18.5355 6.46447C19.4732 7.40215 20 8.67392 20 10C20 11.3261 19.4732 12.5979 18.5355 13.5355C17.5979 14.4732 16.3261 15 15 15C13.6739 15 12.4021 14.4732 11.4645 13.5355C10.5268 12.5979 10 11.3261 10 10C10 8.67392 10.5268 7.40215 11.4645 6.46447C12.4021 5.52678 13.6739 5 15 5ZM15 17.5C20.525 17.5 25 19.7375 25 22.5V25H5V22.5C5 19.7375 9.475 17.5 15 17.5Z" fill="white"/>
+          </svg>
+          <span class="text-lg lg:text-xl">Customer</span>
+      </button>
+
+      </a>
+
+      <!-- Restaurant Owner Button -->
+
+      <a href="{% url 'restaurant_signin' %}">
+
+        <button class="flex items-center justify-center h-14 lg:h-16 px-6 lg:px-8 rounded-3xl border border-white bg-transparent text-white hover:bg-white hover:bg-opacity-10 transition-all whitespace-nowrap" style="font-family: 'Inter', sans-serif;">
+          <!-- SVG + text -->
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+              <path d="M27.9124 13.75L25.4124 5H4.5874L2.0874 13.75H6.4999L4.9999 25H7.4999L8.3374 18.75H21.6749L22.4999 25H24.9999L23.4999 13.75H27.9124ZM8.6624 16.25L8.9999 13.75H20.9999L21.3374 16.25H8.6624Z" fill="white"/>
+            </svg>
+            <span class="text-lg lg:text-xl">Restaurant Owner</span>
+        </button>
+
+      </a>
+
+      <!-- Delivery Person Button -->
+
+      <a href="{% url 'deliveryperson_signin' %}">
+
+        <button class="flex items-center justify-center h-14 lg:h-16 px-6 lg:px-8 rounded-3xl border border-white bg-transparent text-white hover:bg-white hover:bg-opacity-10 transition-all whitespace-nowrap" style="font-family: 'Inter', sans-serif;">
+          <!-- SVG + text -->
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+          <path d="M13.75 15.625H10.3125C10.2296 15.625 10.1501 15.6579 10.0915 15.7165C10.0329 15.7751 10 15.8546 10 15.9375V20.625C10 20.7411 9.96768 20.8548 9.90666 20.9536C9.84564 21.0523 9.75832 21.1321 9.65451 21.184C9.55069 21.2359 9.43447 21.2579 9.31887 21.2475C9.20327 21.2371 9.09286 21.1946 9 21.125L7.75 20.1375C7.6945 20.1004 7.62925 20.0806 7.5625 20.0806C7.49575 20.0806 7.4305 20.1004 7.375 20.1375L6.125 21.125C6.03214 21.1946 5.92173 21.2371 5.80613 21.2475C5.69053 21.2579 5.57431 21.2359 5.47049 21.184C5.36668 21.1321 5.27936 21.0523 5.21834 20.9536C5.15732 20.8548 5.125 20.7411 5.125 20.625V15.9375C5.125 15.8546 5.09208 15.7751 5.03347 15.7165C4.97487 15.6579 4.89538 15.625 4.8125 15.625H1.25C0.918479 15.625 0.600537 15.7567 0.366117 15.9911C0.131696 16.2255 0 16.5435 0 16.875L0 28.75C0 29.0815 0.131696 29.3995 0.366117 29.6339C0.600537 29.8683 0.918479 30 1.25 30H13.75C14.0815 30 14.3995 29.8683 14.6339 29.6339C14.8683 29.3995 15 29.0815 15 28.75V16.875C15 16.5435 14.8683 16.2255 14.6339 15.9911C14.3995 15.7567 14.0815 15.625 13.75 15.625ZM26.625 10.45C26.575 10.4227 26.5327 10.3831 26.5021 10.335C26.4715 10.2869 26.4536 10.2319 26.45 10.175C26.4511 10.1191 26.4667 10.0643 26.4951 10.0162C26.5236 9.96798 26.564 9.92797 26.6125 9.9C27.4115 9.42997 28.074 8.75951 28.5343 7.95492C28.9947 7.15033 29.2371 6.2395 29.2375 5.3125C29.2057 3.91353 28.6358 2.58068 27.6463 1.5912C26.6568 0.601726 25.324 0.031807 23.925 0C22.9388 0.00861966 21.974 0.288403 21.1362 0.808722C20.2984 1.32904 19.6199 2.06983 19.175 2.95C19.1488 3.00356 19.1078 3.0485 19.0568 3.07951C19.0059 3.11052 18.9471 3.12631 18.8875 3.125H16.875C16.5435 3.125 16.2255 3.2567 15.9911 3.49112C15.7567 3.72554 15.625 4.04348 15.625 4.375C15.625 4.70652 15.7567 5.02446 15.9911 5.25888C16.2255 5.4933 16.5435 5.625 16.875 5.625H18.35C18.4246 5.62745 18.4959 5.65653 18.5509 5.70697C18.6059 5.75741 18.6411 5.82589 18.65 5.9C18.7452 6.69665 19.0195 7.4614 19.4525 8.13685C19.8855 8.8123 20.4658 9.38091 21.15 9.8C21.198 9.83059 21.2371 9.87325 21.2634 9.92371C21.2897 9.97416 21.3024 10.0306 21.3 10.0875C21.2956 10.1442 21.2758 10.1986 21.2427 10.2448C21.2097 10.2911 21.1647 10.3274 21.1125 10.35C20.0357 10.8512 19.1241 11.6488 18.4843 12.6495C17.8445 13.6501 17.5031 14.8123 17.5 16V19.75C17.5032 19.9148 17.5701 20.0719 17.6866 20.1884C17.8031 20.3049 17.9602 20.3718 18.125 20.375H20C20.0766 20.3778 20.1494 20.4087 20.2047 20.4617C20.26 20.5147 20.2939 20.5861 20.3 20.6625L21.25 29.2625C21.2682 29.4161 21.3416 29.5579 21.4566 29.6614C21.5716 29.7649 21.7203 29.823 21.875 29.825H25.625C25.7805 29.8258 25.9307 29.7686 26.0462 29.6646C26.1618 29.5606 26.2345 29.4172 26.25 29.2625L27.1125 20.6875C27.1188 20.609 27.1545 20.5358 27.2124 20.4825C27.2704 20.4292 27.3463 20.3997 27.425 20.4H29.375C29.5398 20.3968 29.6969 20.3299 29.8134 20.2134C29.9299 20.0969 29.9968 19.9398 30 19.775V16.025C30.0047 14.8752 29.6921 13.7464 29.0966 12.7628C28.5012 11.7792 27.6459 10.9789 26.625 10.45ZM26.525 5.625C26.566 5.61442 26.609 5.61442 26.65 5.625C26.6593 5.64673 26.6641 5.67012 26.6641 5.69375C26.6641 5.71738 26.6593 5.74077 26.65 5.7625C26.517 6.36321 26.1899 6.9034 25.7191 7.29956C25.2484 7.69573 24.6603 7.92582 24.0457 7.95428C23.4311 7.98273 22.8242 7.80796 22.3189 7.45698C21.8136 7.106 21.4379 6.59835 21.25 6.0125C21.2292 5.97189 21.2183 5.9269 21.2183 5.88125C21.2183 5.8356 21.2292 5.79061 21.25 5.75C21.2772 5.71216 21.3128 5.68116 21.354 5.65946C21.3952 5.63776 21.4409 5.62597 21.4875 5.625H26.525Z" fill="white"/>
+            </svg>
+            <span class="text-lg lg:text-xl">Delivery Person</span>
+        </button>
+
+      </a>
+    </div>
+</div>
+
+</section>
+
+<!-- Featured Restaurants Section -->
+<section class="w-full py-16 lg:py-20 bg-white">
+  <!-- Section Header -->
+  <div class="text-center mb-12 lg:mb-24">
+    <h2 class="text-gray-900 text-3xl lg:text-4xl font-bold mb-3" style="font-family: 'Inter', sans-serif;">
+      Featured Restaurants
+    </h2>
+    <p class="text-gray-600 text-lg tracking-tight" style="font-family: 'Inter', sans-serif; font-weight: 300;">
+      Popular choices
+    </p>
+  </div>
+
+  <!-- Restaurants Grid -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10" id="restaurant-container">
+      
+      <!-- Restaurant Card 1 -->
+
+
+    </div>
+  </div>
+</section>
+{% include "footer.html" %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Food tag interactions
+    document.querySelectorAll('.food-tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            const searchInputs = document.querySelectorAll('input[type="text"]');
+            searchInputs.forEach(input => {
+                input.value = this.textContent.trim();
+            });
+            
+            // Visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+    });
+
+    // Find Food button functionality
+    document.querySelectorAll('button').forEach(btn => {
+        if (btn.textContent.includes('Find Food')) {
+            btn.addEventListener('click', function() {
+                const searchInput = document.querySelector('input[type="text"]');
+                const query = searchInput ? searchInput.value.trim() : '';
+                
+                if (query) {
+                    console.log('Searching for:', query);
+                    // Here you would typically navigate to a results page or perform the search
+                    alert(`Searching for: ${query}`);
+                } else {
+                    alert('Please enter a restaurant name or cuisine type');
+                }
+            });
+        }
+    });
+
+    // Search on Enter key
+    document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const findFoodBtn = document.querySelector('button:has-text("Find Food")') || 
+                                  Array.from(document.querySelectorAll('button')).find(btn => btn.textContent.includes('Find Food'));
+                if (findFoodBtn) {
+                    findFoodBtn.click();
+                }
+            }
+        });
+    });
+
+    // Community button interactions
+    const communityButtons = Array.from(document.querySelectorAll('button')).filter(btn => 
+        btn.textContent.includes('Customer') || 
+        btn.textContent.includes('Restaurant Owner') || 
+        btn.textContent.includes('Delivery Person')
+    );
+    
+    communityButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const role = this.textContent.trim();
+            console.log('Selected role:', role);
+            alert(`Selected role: ${role}`);
+            // Here you would typically navigate to registration page
+        });
+    });
+
+    // Restaurant card interactions
+    document.querySelectorAll('[class*="border-black"]').forEach(card => {
+        if (card.querySelector('img')) {
+            card.addEventListener('click', function() {
+                const nameElement = this.querySelector('h3');
+                const name = nameElement ? nameElement.textContent : 'Unknown Restaurant';
+                console.log('Selected restaurant:', name);
+                alert(`Selected restaurant: ${name}`);
+                // Here you would typically navigate to restaurant page
+            });
+        }
+    });
+});
+
+
+
+
+
+  fetch('/api/restaurant/restaurant_list/')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('restaurant-container');
+      data.forEach(restaurant => {
+        const card = document.createElement('div');
+        card.className = "bg-white border border-black overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform duration-300";
+
+        card.innerHTML = `
+          <div class="relative h-48 lg:h-56">
+            <img src="${restaurant.logo_url || 'https://via.placeholder.com/300x200'}" alt="${restaurant.restaurant_name}" class="w-full h-full object-cover">
+            {% comment %} <img src="${restaurant.image_url || 'https://via.placeholder.com/300x200'}"
+                 alt="${restaurant.name}"
+                 class="w-full h-full object-cover"> {% endcomment %}
+          </div>
+          <div class="p-5 lg:p-7">
+            <h3 class="text-black text-xl lg:text-2xl font-semibold mb-2" style="font-family: 'Inter', sans-serif;">
+              ${restaurant.restaurant_name}
+            </h3>
+            <p class="text-black text-lg tracking-tight" style="font-family: 'Inter', sans-serif; font-weight: 300;">
+             ${restaurant.cuisine || 'Unknown Cuisine'}
+            </p>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    })
+    .catch(error => console.error('Error fetching restaurant list:', error));
+</script>
+
+{% endblock %}

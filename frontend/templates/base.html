@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inside <head> or before closing </body> -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <title>{% block title %}Food Delivery{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/input.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Inter:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+
+    {% comment %} <!-- API Connection Test -->
+    {% csrf_token %}
+    <div id="api-test"></div>
+    <script>
+    fetch('/api/test/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('api-test').textContent = 'Backend connected successfully!';
+    })
+    .catch(error => {
+        document.getElementById('api-test').textContent = 'Error connecting to backend: ' + error;
+    });
+    </script> {% endcomment %}
+</body>
+</html>

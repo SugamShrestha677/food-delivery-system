@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Restaurant-quality meals in 30 mins - Food Delivery{% endblock %}
+
+{% block content %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+.app-store-btn:hover {
+  transform: translateY(-1px);
+}
+
+.app-store-btn:active {
+  transform: translateY(0);
+}
+
+.phone-mockup {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1023px) {
+  .phone-mockup {
+    display: none;
+  }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 640px) {
+  .app-store-btn {
+    padding: 12px 20px;
+    min-width: 180px;
+  }
+}
+</style>
+
+
+
+<!-- App Download Section -->
+<section class="relative w-full h-auto min-h-[500px] lg:h-[561px] flex justify-center items-center overflow-hidden" style="font-family: 'Inter', sans-serif;">
+  <!-- Background Image -->
+  <div class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-10"
+       style="background-image: linear-gradient(to right, #f44248, gray);"
+
+  </div>
+
+  <!-- Content Container -->
+  <div class="relative z-20 flex items-center justify-between max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-16 lg:py-0 gap-8 lg:gap-20 xl:gap-32">
+
+    <!-- Left Content -->
+    <div class="flex-1 max-w-lg lg:max-w-xl text-center lg:text-left">
+      <!-- Main Heading -->
+      <h2 class="text-white font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight mb-6" style="font-family: 'Inter', sans-serif;">
+        Download Our App
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="text-white font-normal text-base sm:text-lg lg:text-xl leading-relaxed mb-8 lg:mb-10 opacity-90" style="font-family: 'Inter', sans-serif;">
+        Get the best experience with our mobile app. Order food, track delivery, and get exclusive offers.
+      </p>
+
+      <!-- App Store Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center">
+
+        <!-- App Store Button -->
+        <div class="app-store-btn bg-black flex flex-col justify-center items-start py-3 px-6 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gray-800 hover:shadow-lg min-w-[140px] sm:min-w-[160px] w-full sm:w-auto max-w-[200px]">
+          <div class="text-white font-normal text-xs leading-4 mb-0.5" style="font-family: 'Inter', sans-serif;">
+            Download on the
+          </div>
+          <div class="text-white font-semibold text-sm sm:text-base leading-5" style="font-family: 'Inter', sans-serif;">
+            App Store
+          </div>
+        </div>
+
+        <!-- Google Play Button -->
+        <div class="app-store-btn bg-black flex flex-col justify-center items-start py-3 px-6 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gray-800 hover:shadow-lg min-w-[140px] sm:min-w-[160px] w-full sm:w-auto max-w-[200px]">
+          <div class="text-white font-normal text-xs leading-4 mb-0.5" style="font-family: 'Inter', sans-serif;">
+            GET IT ON
+          </div>
+          <div class="text-white font-semibold text-sm sm:text-base leading-5" style="font-family: 'Inter', sans-serif;">
+            Google Play
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right Content - Phone Mockup -->
+    <div class="hidden lg:flex justify-center items-center">
+      <div class="phone-mockup bg-gray-800 w-72 h-[560px] rounded-[40px] p-5 flex justify-center items-center shadow-2xl">
+        <div class="w-full h-full bg-white rounded-[30px] flex flex-col justify-center items-center gap-5">
+
+          <!-- App Icon -->
+          <div class="app-icon bg-red-500 w-20 h-20 rounded-2xl flex justify-center items-center">
+            <div class="w-10 h-10 text-white">
+              <!-- Restaurant/Food Icon -->
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 2v20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- App Name -->
+          <div class="text-gray-800 font-semibold text-lg text-center" style="font-family: 'Inter', sans-serif;">
+            FoodExpress
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

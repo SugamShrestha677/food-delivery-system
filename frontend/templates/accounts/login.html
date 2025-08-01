@@ -1,0 +1,548 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f97316',
+                        secondary: '#ea580c',
+                        accent: '#ffedd5',
+                        dark: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+           @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #fff5e6, #fffaf0);
+        }
+        .food-bg {
+  background-image: 
+    linear-gradient(to bottom right, #fb923c, #ea580c),
+    url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSIyIiBmaWxsPSIjZmY5ZjY1IiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxLjUiIGZpbGw9IiNmZjdmNTAiIG9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjYwIiBjeT0iMjAiIHI9IjIiIGZpbGw9IiNmZjlmNjUiIG9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjcwIiBjeT0iNjAiIHI9IjEuNSIgZmlsbD0iI2ZmN2Y1MCIgb3BhY2l0eT0iMC4zIi8+PC9zdmc+');
+  background-size: cover, 100px;
+  background-repeat: no-repeat, repeat;
+}
+        .card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+        }
+        .btn-primary {
+            transition: all 0.3s ease;
+            background: linear-gradient(to right, #f97316, #ea580c);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.3), 0 4px 6px -2px rgba(249, 115, 22, 0.2);
+        }
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-2px);
+        }
+        .tab-active {
+            position: relative;
+        }
+        .tab-active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #f97316;
+            border-radius: 3px;
+        }
+</style>
+
+
+<div class="min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-5xl w-full flex flex-col lg:flex-row card rounded-2xl overflow-hidden">
+        <!-- Left Side - Branding -->
+        <div class="w-full lg:w-2/5 bg-gradient-to-br from-orange-400 to-orange-600 text-white p-1 md:p-12 food-bg">
+                <button class="py-2 rounded-lg border border-gray-300 flex items-center justify-center text-white hover:border-dark hover:text-dark text-lg w-24 mb-5">
+                                    <i class="ri-arrow-left-line"></i>
+                                    <a href="/">Back</a>
+                </button>
+                <div class="mb-10">
+                    <div class="flex items-center mb-2">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mr-3">
+                            <i class="fas fa-utensils text-orange-500 text-xl"></i>
+                        </div>
+                        <h1 class="text-3xl font-bold">Tasty<span class="text-orange-100">Bites</span></h1>
+                    </div>
+                    <p class="text-orange-100 text-lg">Restaurant-quality meals in 30 mins</p>
+                </div>
+                
+                <div class="space-y-6 mb-12">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-clock text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Quick Delivery</h3>
+                            <p class="text-orange-100">Food at your door in 30 mins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-star text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Quality Food</h3>
+                            <p class="text-orange-100">Chef-prepared meals</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-tag text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Best Prices</h3>
+                            <p class="text-orange-100">Great value for money</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white/20 p-4 rounded-xl  drop-blur-sm">
+                    <p class="italic">"Because it's always nice for us again. Quality food that feels like home!"</p>
+                </div>
+            </div>
+            
+            <!-- Right Side - Form -->
+            <div class="w-full lg:w-3/5 bg-white p-8 md:p-12">
+                <div class="text-center mb-8">
+                    <h2 id="form-title" class="text-3xl font-bold text-gray-800 mb-2">Welcome Back!</h2>
+                    <p id="form-subtitle" class="text-gray-600">Sign in to order your favorite meals</p>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-200 mb-8">
+                    <button id="login-tab" class="flex-1 py-3 px-4 text-center font-medium text-primary tab-active">Login</button>
+                    <button id="signup-tab" class="flex-1 py-3 px-4 text-center font-medium text-gray-500">Sign Up</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="login-form" class="space-y-5">
+                    {% csrf_token %}
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="username">Username</label>
+                        <div class="relative">
+                            <input 
+                                id="username"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="username"
+                                required
+                            >
+                            <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="password">Password</label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="••••••••"
+                                required
+                            >
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" class="h-4 w-4 text-primary border-gray-300 rounded">
+                            <label for="remember" class="ml-2 text-gray-700">Remember me</label>
+                        </div>
+                        <a href="#" class="text-primary hover:text-orange-800 font-medium">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3 btn-primary text-white font-bold rounded-lg">
+                        Login to Your Account
+                    </button>
+                </form>
+                
+                <!-- Signup Form (Hidden by default) -->
+                <form id="signup-form" method="POST" enctype="multipart/form-data" action="/api/auth/register/" class="space-y-5 hidden">
+                    {% csrf_token %}
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="firstname">First Name</label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="firstname"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="John Doe"
+                                name="firstname"
+                                required
+                            >
+                            <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="lastname">Last Name</label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="lastname"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="John Doe"
+                                name="lastname"
+                                required
+                            >
+                            <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="signup-username">Username</label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="signup-username"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                name="username"
+                                placeholder="Choose a username"
+                                required
+                            >
+                            <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="signup-email">Email Address</label>
+                        <div class="relative">
+                            <input 
+                                type="email" 
+                                id="signup-email"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="your@email.com"
+                                name="signup-email"
+                                required
+                            >
+                            <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="signup-password">Password</label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="signup-password"
+                                name="signup-password"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="••••••••"
+                                required
+                            >
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="signup-confirm">Confirm Password</label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="signup-confirm"
+                                name="signup-confirm"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="••••••••"
+                                required
+                            >
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+
+
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="contact">Phone</label>
+                        <div class="relative">
+                            <input 
+                                id="contact"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="123456789"
+                                name="contact"
+                                required
+                            >
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="Address">Address</label>
+                        <div class="relative">
+                            <input 
+                                id="address"
+                                class="w-full p-3 pl-12 input-field rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                                placeholder="123456789"
+                                name="address"
+                                required
+                            >
+                            <i class="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+
+                    <div>
+                                    <label class="block text-gray-700 mb-2 font-medium" for="profile">Profile Photo</label>
+                                    <input 
+                                        type="file" 
+                                        id="profile" 
+                                        name="profile" 
+                                        accept="image/*"
+                                        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none"
+                                    >
+                                </div>
+
+                    <input type="hidden" name="role" value="customer"> 
+
+
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms" class="h-4 w-4 text-primary border-gray-300 rounded" required>
+                        <label for="terms" class="ml-2 text-gray-700">I agree to the <a href="#" class="text-primary hover:underline">Terms & Conditions</a></label>
+                    </div>
+                    
+                    <a href="#login-form">
+                        <button type="submit" class="w-full py-3 btn-primary text-white font-bold rounded-lg">
+                        Create Account
+                    </button>
+                    </a>
+                    
+                </form>
+                
+                <div class="my-6 flex items-center">
+                    <div class="flex-grow border-t border-gray-300"></div>
+                    <span class="mx-4 text-gray-500">or continue with</span>
+                    <div class="flex-grow border-t border-gray-300"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="py-3 rounded-lg social-btn border border-gray-300 flex items-center justify-center text-gray-700 hover:border-primary hover:text-primary">
+                        <i class="fab fa-google text-red-500 mr-2"></i>
+                        <span>Google</span>
+                    </button>
+                    <button class="py-3 rounded-lg social-btn border border-gray-300 flex items-center justify-center text-gray-700 hover:border-blue-600 hover:text-blue-600">
+                        <i class="fab fa-facebook text-blue-600 mr-2"></i>
+                        <span>Facebook</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+</div>
+    
+    <script>
+        // Form toggle functionality
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const formTitle = document.getElementById('form-title');
+        const formSubtitle = document.getElementById('form-subtitle');
+        
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('text-primary', 'tab-active');
+            signupTab.classList.remove('text-primary', 'tab-active');
+            signupTab.classList.add('text-gray-500');
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            formTitle.textContent = 'Welcome Back!';
+            formSubtitle.textContent = 'Sign in to order your favorite meals';
+        });
+        
+        signupTab.addEventListener('click', () => {
+            signupTab.classList.add('text-primary', 'tab-active');
+            loginTab.classList.remove('text-primary', 'tab-active');
+            loginTab.classList.add('text-gray-500');
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            formTitle.textContent = 'Create Account';
+            formSubtitle.textContent = 'Join us to enjoy delicious meals';
+        });
+        
+        // Form validation
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if(email && password) {
+                // Simulate login process
+                alert(`Login successful!\nEmail: ${email}`);
+                // In a real app, you would make an API call here
+            }
+        });
+        
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+    const signupForm = document.getElementById('signup-form');
+    if (!signupForm) {
+        console.error("Signup form not found.");
+        return;
+    }
+
+
+
+    function getCSRFToken() {
+    const match = document.cookie.match(/csrftoken=([^;]+)/);
+    return match ? match[1] : null;
+}
+const csrfToken = getCSRFToken();
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const firstname = document.getElementById('firstname')?.value || '';
+        const lastname = document.getElementById('lastname')?.value || '';
+        const username = document.getElementById('signup-username')?.value;
+        const contact = document.getElementById('contact')?.value;
+        const address = document.getElementById('address')?.value;
+        const email = document.getElementById('signup-email')?.value;
+        const password = document.getElementById('signup-password')?.value;
+        const confirm = document.getElementById('signup-confirm')?.value;
+        const photo = document.getElementById('profile')?.files[0];  // Optional: handle file upload separately
+
+        if (password !== confirm) {
+            alert("Passwords don't match!");
+            return;
+        }
+
+
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("phone", contact);
+        formData.append("address", address);
+        formData.append("photo", photo); // only works if `photo` is not null
+        formData.append("role", "customer");
+
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
+                method: "POST",
+                headers: {
+                        'X-CSRFToken': csrfToken  // ✅ send token manually
+                    },
+                    credentials: 'include',       // ✅ send cookies
+                    body: formData
+            });
+
+            const text = await response.text();
+            let data = {};
+            try {
+                data = JSON.parse(text);
+            } catch {
+                console.warn("Non-JSON response:", text);
+            }
+
+            if (response.ok) {
+                alert("Account created successfully! Please log in.");
+                // Optionally redirect or clear form
+                signupForm.reset();
+            } else {
+                alert("Signup failed: " + (data.detail || JSON.stringify(data)));
+            }
+
+        } catch (err) {
+            console.error("Request error:", err);
+            alert("Error submitting form: " + err.message);
+        }
+    });
+});
+        
+        // Social login
+        document.querySelectorAll('.social-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const platform = button.textContent.trim();
+                alert(`Logging in with ${platform}...`);
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+        // authentication
+    document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("login-form");
+    if (!loginForm) {
+        console.error("Login form not found.");
+        return;
+    }
+
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+
+        if (!username || !password) {
+            console.error("Username or password input missing in HTML.");
+            return;
+        }
+
+        const loginData = {
+            username: username.value,
+            password: password.value
+        };
+
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(loginData),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error("Login failed: " + errorText);
+            }
+
+            const data = await response.json();
+            console.log("Login success: ", data);
+
+            // Store tokens
+            localStorage.setItem("access_token", data.access);
+            localStorage.setItem("refresh_token", data.refresh);
+
+            // Redirect or update UI
+            window.location.href = "/customer/";
+        } catch (error) {
+            console.error("Error logging in: ", error.message);
+            alert("Login failed: " + error.message);
+        }
+    });
+});
+    </script>
+
+{% endblock %}
