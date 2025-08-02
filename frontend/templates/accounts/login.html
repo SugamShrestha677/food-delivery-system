@@ -536,7 +536,7 @@ const csrfToken = getCSRFToken();
             localStorage.setItem("refresh_token", data.refresh);
 
             // Redirect or update UI
-            window.location.href = "/customer/";
+            window.location.href = "/customer/dashboard/";
         } catch (error) {
             console.error("Error logging in: ", error.message);
             alert("Login failed: " + error.message);
