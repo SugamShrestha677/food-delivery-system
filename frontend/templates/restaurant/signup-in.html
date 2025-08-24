@@ -486,50 +486,49 @@
  document.querySelector('#signup-forms').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = {
-        restaurant_name: document.getElementById('restaurant-name').value,
-        username: document.getElementById('signup-username').value,
-        password: document.getElementById('signup-password').value,
-        email: document.getElementById('signup-email').value,
-        address: document.getElementById('address').value,
-        contact: document.getElementById('phone').value,
-        cuisine_type: document.getElementById('cuisine-type').value,
-        delivery_fees: 0,  // or from input field
-        role: "restaurant_owner"
-    };
+    const formData = new FormData();
+    formData.append('owner_name', document.getElementById('owner-name').value);
+    formData.append('restaurant_name', document.getElementById('restaurant-name').value);
+    formData.append('username', document.getElementById('signup-username').value);
+    formData.append('password', document.getElementById('signup-password').value);
+    formData.append('email', document.getElementById('signup-email').value);
+    formData.append('address', document.getElementById('address').value);
+    formData.append('contact', document.getElementById('phone').value);
+    formData.append('cuisine_type', document.getElementById('cuisine-type').value);
+    formData.append('logo', document.getElementById('restaurant-logo').files[0]);  // file input
+    formData.append('delivery_fees', 0);
+    formData.append('role', 'restaurant_owner');
+
     try {
-    const csrfToken = getCSRFToken();
+        const csrfToken = getCSRFToken();
 
-    const response = await fetch('http://127.0.0.1:8000/api/restaurant/register/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        },
-        credentials: 'include',
-        body: JSON.stringify(formData)
-    });
+        const response = await fetch('http://127.0.0.1:8000/api/restaurant/register/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken
+                // Don't set Content-Type manually — browser sets it automatically for FormData
+            },
+            credentials: 'include',
+            body: formData
+        });
 
-    const text = await response.text(); // Only one read
+        const text = await response.text();
 
-    let data = {};
-    try {
-        data = JSON.parse(text);
-    } catch (err) {
-        console.warn('Response was not JSON:', text);
+        let data = {};
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.warn('Response was not JSON:', text);
+        }
+
+        if (response.ok) {
+            alert('Registration successful!');
+        } else {
+            alert(`Error: ${data.detail || JSON.stringify(data)}`);
+        }
+    } catch (error) {
+        alert('An error occurred: ' + error.message);
     }
-
-    if (response.ok) {
-        alert('Registration successful! Please login.');
-        loginTab?.click();  // Use optional chaining in case loginTab is undefined
-    } else {
-        alert(`Error: ${data.detail || JSON.stringify(data)}`);
-    }
-
-} catch (error) {
-    alert('An error occurred: ' + error.message);
-}
-
 });
 
 
@@ -538,30 +537,39 @@
 
 
 
+
 // login form 
-document.getElementById("login-form").addEventListener("submit", async function (e) {
-    e.preventDefault(); // prevent form from submitting the normal way
+document.getElementById("login-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("login-password").value; // Fixed here
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("login-password").value;
 
-    const response = await fetch("http://localhost:8000/api/auth/login/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username, password })
-    });
+    try {
+        const response = await fetch("http://localhost:8000/api/auth/login/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        });
 
-    if (response.ok) {
         const data = await response.json();
+
+        if (!response.ok) throw new Error(data.detail || "Login failed");
+
+        if (data.role !== "restaurant_owner") {
+            alert("Access denied: Only restaurant owners can login here.");
+            return;
+        }
+
         localStorage.setItem("access_token", data.access);
         localStorage.setItem("refresh_token", data.refresh);
-        console.log("Login successful. Redirecting now...");
+        localStorage.setItem("user_role", data.role);
+        localStorage.setItem("username", data.username);
 
-        window.location.href = "/restaurant/dashboard/";
-    } else {
-        alert("Login failed. Please check your credentials.");
+        // Redirect to restaurant dashboard page (SPA or template)
+        window.location.href = "/restaurant/dashboard/"; 
+    } catch (error) {
+        alert(error.message);
     }
 });
 
@@ -581,7 +589,7 @@ document.getElementById("login-form").addEventListener("submit", async function 
             togglePassword.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
         });
 </script>
-
+<script src="{% static 'js/restaurant_profile.js' %}"></script>
 {% endblock %}
 
 

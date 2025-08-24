@@ -305,17 +305,17 @@
         setInterval(updateStats, 30000);
 
         // Add new order simulation
-        function addNewOrder() {
-            const ordersTableBody = document.getElementById('ordersTableBody');
-            const orderIds = ['ORD-281', 'ORD-282', 'ORD-283', 'ORD-284'];
-            const customers = ['Sarah Johnson', 'Mike Wilson', 'Lisa Chen', 'Tom Anderson'];
-            const items = ['Margherita Pizza', 'Pasta Carbonara', 'Chicken Parmesan', 'Tiramisu'];
-            const times = ['03:15 PM', '03:20 PM', '03:25 PM', '03:30 PM'];
-            const totals = ['$32.00', '$28.50', '$45.00', '$18.00'];
-
-            const randomIndex = Math.floor(Math.random() * orderIds.length);
-            
-            const newRow = document.createElement('tr');
+        //function addNewOrder() {
+          //  const ordersTableBody = document.getElementById('ordersTableBody');
+           // const orderIds = ['ORD-281', 'ORD-282', 'ORD-283', 'ORD-284'];
+          //  const customers = ['Sarah Johnson', 'Mike Wilson', 'Lisa Chen', 'Tom Anderson'];
+          //  const items = ['Margherita Pizza', 'Pasta Carbonara', 'Chicken Parmesan', 'Tiramisu'];
+          //  const times = ['03:15 PM', '03:20 PM', '03:25 PM', '03:30 PM'];
+          //  const totals = ['$32.00', '$28.50', '$45.00', '$18.00'];
+//
+          //  const randomIndex = Math.floor(Math.random() * orderIds.length);
+          //  
+          //  const newRow = document.createElement('tr');
             newRow.className = 'border-b border-brand-light-gray order-row';
             newRow.innerHTML = `
                 <td class="p-4 text-sm text-black font-medium">${orderIds[randomIndex]}</td>
@@ -388,5 +388,5 @@
             }
         });
     </script>
-
+<script src="{% static 'js/restaurant_profile.js' %}"></script>
 {% endblock %}

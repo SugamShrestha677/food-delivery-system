@@ -27,6 +27,8 @@ class RegisterView(CreateAPIView):
 # Forget password views
 @method_decorator(csrf_exempt, name='dispatch')
 class PasswordResetRequestView(APIView):
+    authentication_classes = []  
+    permission_classes = []
     def post(self, request):
         serializer = PasswordResetRequestSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
@@ -138,3 +140,18 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 login(request, user)
         
         return response
+    
+
+
+# views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .permission import IsCustomer
+
+class CustomerDashboardAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsCustomer]
+
+    def get(self, request):
+        return Response({"message": f"Welcome {request.user.username}, to your dashboard"})
+

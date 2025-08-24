@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-nl&bs^i4dzun9_d9l#1q9&c0waqvob^32nnf7$tlcnwr@%xt7f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','DESKTOP-0CM6DOH']
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -187,9 +187,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 DEFAULT_FROM_EMAIL = 'noreply@foodexpress.com'
 
 CORS_ALLOW_ALL_ORIGINS = True  # Temporarily allow all origins
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:5500', 'http://localhost:5500']
 CSRF_COOKIE_HTTPONLY = False
+
+# LOGIN_URL = '/restaurant/dashboard/'

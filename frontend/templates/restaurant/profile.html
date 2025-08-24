@@ -44,19 +44,19 @@
                     <div class="flex flex-col md:flex-row items-center gap-6">
                         <div class="relative">
                             <div class="w-24 h-24 bg-brand-light-gray rounded-full flex items-center justify-center text-2xl font-bold text-brand-gray" id="profileAvatar">
-                                BV
+                                <img class="profile w-[100%] h-[100%]" alt="Profile Photo">
                             </div>
                             <button class="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-orange text-white rounded-full flex items-center justify-center hover:bg-brand-orange/90 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
+                                </svg>  
                             </button>
                         </div>
                         <div class="text-center md:text-left">
-                            <h2 class="text-2xl font-bold text-black" id="restaurantName">Bella Vista</h2>
-                            <p class="text-brand-gray mb-2" id="restaurantType">Italian Restaurant</p>
-                            <p class="text-sm text-brand-gray" id="ownerName">Owner: Marco Rossini</p>
+                            <h2 class="restaurant_name text-2xl font-bold text-black" id="restaurantName"></h2>
+                            <p class="text-brand-gray mb-2" id="restaurantType">Contact: <span class="contact"></span></p>
+                            <p class="text-sm text-brand-gray" id="ownerName">Owner: <span class="owner_name"></span></p>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="bg-white border border-brand-light-gray rounded-lg">
                     <div class="border-b border-brand-light-gray">
                         <div class="flex overflow-x-auto">
-                            <button class="tab-button px-6 py-3 text-sm font-medium text-brand-gray hover:text-brand-orange transition-colors whitespace-nowrap" data-tab="general">
+                            <button class="tab-button px-6 py-3 text-sm font-medium text-brand-gray hover:text-brand-orange transition-colors whitespace-nowrap active" data-tab="general">
                                 General Info
                             </button>
                             <button class="tab-button px-6 py-3 text-sm font-medium text-brand-gray hover:text-brand-orange transition-colors whitespace-nowrap" data-tab="hours">
@@ -74,7 +74,7 @@
                             <button class="tab-button px-6 py-3 text-sm font-medium text-brand-gray hover:text-brand-orange transition-colors whitespace-nowrap" data-tab="settings">
                                 Settings
                             </button>
-                            <button class="tab-button px-6 py-3 text-sm font-medium text-brand-gray hover:text-brand-orange transition-colors whitespace-nowrap active" data-tab="security">
+                            <button class="tab-button px-6 py-3 text-sm font-medium text-brand-gray hover:text-brand-orange transition-colors whitespace-nowrap " data-tab="security">
                                 Security
                             </button>
                         </div>
@@ -83,30 +83,30 @@
                     <!-- Tab Content -->
                     <div class="p-6">
                         <!-- General Info Tab -->
-                        <div id="generalTab" class="tab-content hidden">
+                        <div id="generalTab" class="tab-content ">
                             <h3 class="text-xl font-bold text-black mb-2">General Information</h3>
                             <p class="text-brand-gray mb-6">Manage your restaurant's basic information</p>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium text-brand-gray mb-2">Restaurant Name</label>
-                                    <input type="text" id="generalRestaurantName" value="Bella Vista" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <input type="text" id="" value="" class="restaurant_name w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-brand-gray mb-2">Restaurant Type</label>
-                                    <input type="text" id="generalRestaurantType" value="Italian Restaurant" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <label class="block text-sm font-medium text-brand-gray mb-2">Delivery fees</label>
+                                    <input type="text" id="generalRestaurantType" value="Italian Restaurant" class="delivery_fees w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-brand-gray mb-2">Owner Name</label>
-                                    <input type="text" id="generalOwnerName" value="Marco Rossini" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <input type="text" id="generalOwnerName" value="" class="owner_name w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-brand-gray mb-2">Phone Number</label>
-                                    <input type="tel" id="generalPhone" value="+1 (555) 123-4567" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
+                                    <input type="tel" id="generalPhone" value="" class="contact w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">
                                 </div>
                                 <div class="md:col-span-2">
                                     <label class="block text-sm font-medium text-brand-gray mb-2">Address</label>
-                                    <textarea id="generalAddress" rows="3" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">123 Main Street, Downtown, New York, NY 10001</textarea>
+                                    <textarea id="generalAddress" rows="3" class="address w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent">123 Main Street, Downtown, New York, NY 10001</textarea>
                                 </div>
                                 <div class="md:col-span-2">
                                     <label class="block text-sm font-medium text-brand-gray mb-2">Description</label>
@@ -179,7 +179,7 @@
                         </div>
 
                         <!-- Security Tab -->
-                        <div id="securityTab" class="tab-content">
+                        <div id="securityTab" class="tab-content hidden">
                             <h3 class="text-xl font-bold text-black mb-2">Security Settings</h3>
                             <p class="text-brand-gray mb-6">Manage your account security</p>
                             
@@ -293,24 +293,7 @@
     </div>
 
     <script>
-        // Restaurant profile data
-        let restaurantProfile = {
-            name: 'Bella Vista',
-            type: 'Italian Restaurant',
-            owner: 'Marco Rossini',
-            phone: '+1 (555) 123-4567',
-            address: '123 Main Street, Downtown, New York, NY 10001',
-            description: 'Authentic Italian cuisine in the heart of downtown. We serve traditional dishes made with fresh, locally sourced ingredients.',
-            operatingHours: {
-                monday: { open: '11:00', close: '22:00', closed: false },
-                tuesday: { open: '11:00', close: '22:00', closed: false },
-                wednesday: { open: '11:00', close: '22:00', closed: false },
-                thursday: { open: '11:00', close: '22:00', closed: false },
-                friday: { open: '11:00', close: '23:00', closed: false },
-                saturday: { open: '10:00', close: '23:00', closed: false },
-                sunday: { open: '10:00', close: '21:00', closed: false }
-            }
-        };
+
 
         // Sample login sessions
         const loginSessions = [
@@ -559,17 +542,7 @@
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            renderOperatingHours();
-            
-            // Populate general info form
-            document.getElementById('generalRestaurantName').value = restaurantProfile.name;
-            document.getElementById('generalRestaurantType').value = restaurantProfile.type;
-            document.getElementById('generalOwnerName').value = restaurantProfile.owner;
-            document.getElementById('generalPhone').value = restaurantProfile.phone;
-            document.getElementById('generalAddress').value = restaurantProfile.address;
-            document.getElementById('generalDescription').value = restaurantProfile.description;
-        });
+        
 
         // Responsive handling
         window.addEventListener('resize', function() {
@@ -579,4 +552,5 @@
             }
         });
     </script>
+    <script src="{% static 'js/restaurant_profile.js' %}"></script>
 {% endblock %}

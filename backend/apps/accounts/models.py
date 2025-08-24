@@ -34,7 +34,7 @@ class Users(AbstractUser):  # ← ✅ This is the fix
     phone = models.CharField(max_length=15, blank=True)
     address = models.TextField(blank=True)
     photo = models.ImageField(upload_to='profile_photos/', blank=True, null=True)
-
+    owner_name = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.username

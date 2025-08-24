@@ -20,9 +20,20 @@ class DeliveryStatusUpdateSerializer(serializers.ModelSerializer):
 
 
 class DeliveryPersonSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = DeliveryPerson
-        fields = ['id', 'user', 'phone', 'vehicle_number', 'is_available']
+        fields = [
+            'id',
+            'user',
+            'phone',
+            'vehicle_number',
+            'vehicle_type',
+            'license_number',
+            'license_photo',
+            'is_available',
+        ]
         # Optional: if user is not sent via request and you want to use the current user
         # extra_kwargs = {'user': {'read_only': True}}
 
@@ -33,7 +44,7 @@ class DeliveryPersonSerializer(serializers.ModelSerializer):
 
 
 class DeliveryPersonRegisterSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(write_only=True)
+    username = serializers.CharField(source="user.username", read_only=True)
     password = serializers.CharField(write_only=True)
     license_photo = serializers.ImageField(required=False, allow_null=True)
 

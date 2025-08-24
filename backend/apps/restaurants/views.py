@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework import viewsets,permissions
@@ -58,6 +58,18 @@ class MenuItemViewSet(viewsets.ModelViewSet):
     serializer_class = MenuItemSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
+
+    def get_queryset(self):
+        user = self.request.user
+        try:
+            restaurant = Restaurant.objects.get(user=user)  # or .get(pk=user.pk) depending on your model
+        except Restaurant.DoesNotExist:
+            return MenuItem.objects.none()  # return empty queryset if restaurant not found
+
+        return MenuItem.objects.filter(restaurant=restaurant)
+
+
+
     def perform_create(self, serializer):
         restaurant = getattr(self.request.user, 'restaurant', None)
         if not restaurant:
@@ -94,3 +106,60 @@ class RestaurantListAPIView(ListAPIView):
 
     def get_serializer_context(self):
         return {'request': self.request}  # Needed to generate full image URL
+    
+
+from django.contrib.auth import logout, authenticate
+from rest_framework_simplejwt.views import TokenObtainPairView
+# Custom login view with role-based checks
+class CustomTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        
+        if response.status_code == 200:
+            # Get the user from the request
+            username = request.data.get('username')
+            password = request.data.get('password')
+            user = authenticate(username=username, password=password)
+            
+            if user:
+                print(f"DEBUG: API Login - User {user.username} has role: {user.role}")
+                
+                # Add role information to the response
+                response.data['role'] = user.role
+                response.data['username'] = user.username
+                
+                # Also log the user in via Django session for compatibility
+                from django.contrib.auth import login
+                login(request, user)
+        
+        return response
+    
+
+
+# views.py
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .permission import IsRestaurantOwner
+
+class RestaurantDashboardAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsRestaurantOwner]
+
+    def get(self, request):
+        return Response({"message": f"Welcome {request.user.username} to the restaurant dashboard"})
+
+
+class RestaurantProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        restaurant = get_object_or_404(Restaurant, user=request.user)
+        serializer = RestaurantSerializer(restaurant)
+        return Response(serializer.data)
+
+    def put(self, request):
+        restaurant = get_object_or_404(Restaurant, user=request.user)
+        serializer = RestaurantSerializer(restaurant, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

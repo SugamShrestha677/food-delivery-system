@@ -7,6 +7,8 @@ from django.contrib.auth.hashers import make_password
 class Restaurant(models.Model):
     user = models.OneToOneField(Users, on_delete=models.CASCADE, null=True, blank=True)
     restaurant_name = models.CharField(max_length=255)
+    owner_name = models.CharField(max_length=255, null=True, blank=True)
+    username = models.CharField(max_length=255, null=True, blank=True)
     address = models.TextField()
     contact = models.CharField(max_length=100)
     is_approved = models.BooleanField(default=False)
@@ -29,6 +31,7 @@ class MenuItem(models.Model):
     is_available = models.BooleanField(default=True)
     photo = models.ImageField(upload_to='profile_photos/', blank=True, null=True)
     estimated_time = models.TimeField(auto_now=False, auto_now_add=False,default=datetime.time(0, 5))
+    category = models.CharField(max_length=250, blank=True, null=True)
     def __str__(self):
         return self.items
     

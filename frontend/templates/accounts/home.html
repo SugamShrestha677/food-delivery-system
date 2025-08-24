@@ -5,6 +5,8 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/input.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
   /* Custom fonts */
   @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
@@ -16,11 +18,11 @@
 
   /* Custom styles that complement Tailwind */
   .hero-overlay {
-background: linear-gradient(135deg, rgba(39, 39, 39, 0.7), rgba(39, 39, 39, 0.5)),
-              url("/static/images/bg.jpg");
-  background-size: cover;
-  background-position: center;
-  }
+  background: linear-gradient(135deg, rgba(39, 39, 39, 0.7), rgba(39, 39, 39, 0.5)),
+                url("/static/images/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    }
 
   .search-container {
     background: #FFF;
@@ -142,7 +144,7 @@ background: linear-gradient(135deg, rgba(39, 39, 39, 0.7), rgba(39, 39, 39, 0.5)
                 <ul class="flex space-x-18">
                     <li><a href="/" class="text-dark text-2xl hover:text-primary font-medium active-link">Home</a></li>
                     <li><a href="/restaurant/" class="text-dark text-2xl hover:text-primary font-medium">Restaurants</a></li>
-                    <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">About us</a></li>
+                    <li><a href="/about/" class="text-dark text-2xl hover:text-primary font-medium">About us</a></li>
                     <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">Contact</a></li>
                 </ul>
             </nav>

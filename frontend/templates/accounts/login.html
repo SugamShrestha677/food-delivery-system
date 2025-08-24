@@ -491,57 +491,51 @@ const csrfToken = getCSRFToken();
 
 
         // authentication
-    document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("login-form");
-    if (!loginForm) {
-        console.error("Login form not found.");
-        return;
-    }
+    document.getElementById("login-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-    loginForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
 
-        const username = document.getElementById("username");
-        const password = document.getElementById("password");
+    try {
+        const loginResp = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        });
 
-        if (!username || !password) {
-            console.error("Username or password input missing in HTML.");
+        const loginData = await loginResp.json();
+
+        if (!loginResp.ok) throw new Error(loginData.detail || "Login failed");
+
+        if (loginData.role !== "customer") {
+            alert("Access denied: Only customers can login here.");
             return;
         }
 
-        const loginData = {
-            username: username.value,
-            password: password.value
-        };
+        localStorage.setItem("access_token", loginData.access);
+        localStorage.setItem("refresh_token", loginData.refresh);
+        localStorage.setItem("user_role", loginData.role);
+        localStorage.setItem("username", loginData.username);
 
-        try {
-            const response = await fetch("http://127.0.0.1:8000/api/auth/login/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(loginData),
-            });
+        // Optional: Test dashboard API call
+        const dashboardResp = await fetch("http://127.0.0.1:8000/api/customer/dashboard/", {
+            headers: {
+                "Authorization": "Bearer " + loginData.access,
+            },
+        });
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error("Login failed: " + errorText);
-            }
+        if (!dashboardResp.ok) throw new Error("Failed to access dashboard");
 
-            const data = await response.json();
-            console.log("Login success: ", data);
+        const dashboardData = await dashboardResp.json();
+        console.log(dashboardData);
 
-            // Store tokens
-            localStorage.setItem("access_token", data.access);
-            localStorage.setItem("refresh_token", data.refresh);
+        // Redirect to your SPA dashboard page or update UI accordingly
+        window.location.href = "/customer/dashboard/";  // Or wherever your SPA dashboard is
 
-            // Redirect or update UI
-            window.location.href = "/customer/dashboard/";
-        } catch (error) {
-            console.error("Error logging in: ", error.message);
-            alert("Login failed: " + error.message);
-        }
-    });
+    } catch (error) {
+        alert(error.message);
+    }
 });
     </script>
 

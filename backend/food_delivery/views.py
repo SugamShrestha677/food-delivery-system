@@ -14,29 +14,29 @@ from django.http import HttpResponseForbidden
 from functools import wraps
 
 # Enhanced role-based access decorator
-def role_required(allowed_roles):
-    def decorator(view_func):
-        @wraps(view_func)
-        def _wrapped_view(request, *args, **kwargs):
-            if not request.user.is_authenticated:
-                print(f"DEBUG: User not authenticated, redirecting to signin")
-                # Redirect to generic signin that can detect role
-                user_role = getattr(request.user, 'role', None)
-                print(f"[DEBUG] role_required: user={request.user}, role={user_role}, allowed={allowed_roles}")
-                return redirect('signin')
+# def role_required(allowed_roles):
+#     def decorator(view_func):
+#         @wraps(view_func)
+#         def _wrapped_view(request, *args, **kwargs):
+#             if not request.user.is_authenticated:
+#                 print(f"DEBUG: User not authenticated, redirecting to signin")
+#                 # Redirect to generic signin that can detect role
+#                 user_role = getattr(request.user, 'role', None)
+#                 print(f"[DEBUG] role_required: user={request.user}, role={user_role}, allowed={allowed_roles}")
+#                 return redirect('signin')
 
-            
-            print(f"DEBUG: User {request.user.username} has role: {request.user.role}")
-            print(f"DEBUG: Allowed roles: {allowed_roles}")
-            
-            if request.user.role not in allowed_roles:
-                print(f"DEBUG: Access denied - user role '{request.user.role}' not in allowed roles {allowed_roles}")
-                return HttpResponseForbidden("You do not have permission to access this page.")
-            
-            print(f"DEBUG: Access granted for user {request.user.username}")
-            return view_func(request, *args, **kwargs)
-        return _wrapped_view
-    return decorator
+
+#             print(f"DEBUG: User {request.user.username} has role: {request.user.role}")
+#             print(f"DEBUG: Allowed roles: {allowed_roles}")
+
+#             if request.user.role not in allowed_roles:
+#                 print(f"DEBUG: Access denied - user role '{request.user.role}' not in allowed roles {allowed_roles}")
+#                 return HttpResponseForbidden("You do not have permission to access this page.")
+
+#             print(f"DEBUG: Access granted for user {request.user.username}")
+#             return view_func(request, *args, **kwargs)
+#         return _wrapped_view
+#     return decorator
 
 
 
@@ -68,7 +68,7 @@ def restaurant_signin(request):
         user = authenticate(request, username=username, password=password)
         print(f"[DEBUG] Authenticated user: {user} with role: {getattr(user, 'role', 'N/A')}")
 
-        if user is not None and user.role == 'owner':
+        if user is not None and user.role == 'restaurant_owner':
             login(request, user)
             return redirect('restaurant_dashboard')
         else:
@@ -86,38 +86,39 @@ def customer_signin(request):
             return redirect('customer_dashboard')
         else:
             messages.error(request, "Invalid credentials or incorrect role access")
-            
+
     return render(request, 'accounts/login.html')
 
 
 def deliveryperson_signin(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+    # if request.method == "POST":
+    #     username = request.POST.get('username')
+    #     password = request.POST.get('password')
+    #     user = authenticate(request, username=username, password=password)
 
-        if user is not None and user.role == 'driver':
-            login(request, user)
-            return redirect('deliveryperson_dashboard')
-        else:
-            messages.error(request, "Invalid credentials or incorrect role access")
-            
+    #     if user is not None and user.role == 'driver':
+    #         login(request, user)
+    #         return redirect('deliveryperson_dashboard')
+    #     else:
+    #         messages.error(request, "Invalid credentials or incorrect role access")
+
     return render(request, 'driver/driversignin.html')
-@login_required
-@role_required(['restaurant_owner'])
+
+# @role_required(['restaurant_owner'])
+# @login_required
 def restaurant_dashboard(request):
-    print(f"[DEBUG] Accessing restaurant_dashboard | user: {request.user.username} | role: {request.user.role}")
+    # print(f"[DEBUG] Accessing restaurant_dashboard | user: {request.user.username} | role: {request.user.role}")
     return render(request, 'restaurant/dashboard.html')
 
 @login_required
-@role_required(['customer'])
+# @role_required(['customer'])
 def customer_dashboard(request):
     return render(request, 'accounts/customer.html')
 
-@login_required
-@role_required(['driver'])
+# @login_required
+# @role_required(['driver'])
 def deliveryperson_dashboard(request):
-    print(f"[DEBUG] Accessing deliveryperson_dashboard | user: {request.user.username} | role: {request.user.role}")
+    # print(f"[DEBUG] Accessing deliveryperson_dashboard | user: {request.user.username} | role: {request.user.role}")
     return render(request, 'driver/dashboard.html')
 
 
@@ -186,3 +187,12 @@ def restaurant_template_view(request):
     return render(request, "restaurant/restaurant.html")
 def customer(request):
     return render(request, "accounts/customer.html")
+
+
+
+
+def customer_profile(request):
+    return render(request,"accounts/profile.html")
+
+def about_us(request):
+    return render(request, "about-standalone.html")
