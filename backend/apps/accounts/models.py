@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.contrib.auth.models import AbstractUser
 
-# Step 1: Custom User Manager
+# Custom User Manager
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None,role='customer', **extra_fields):
         if not username:
@@ -22,8 +22,8 @@ class UserManager(BaseUserManager):
         return self.create_user(username, email, password, **extra_fields)
 
 
-# Step 2: Custom User Model
-class Users(AbstractUser):  # ← ✅ This is the fix
+# Custom User Model
+class Users(AbstractUser):
     ROLE_CHOICES = (
         ('customer', 'Customer'),
         ('owner', 'Restaurant Owner'),
@@ -38,20 +38,3 @@ class Users(AbstractUser):  # ← ✅ This is the fix
 
     def __str__(self):
         return self.username
-
-# class CustomUserAdmin(BaseUserAdmin):
-#     fields = (
-#         'username',
-#         'password',
-#         'first_name',
-#         'last_name',
-#         'email',
-#         'role',
-#         'phone',
-#         'address',
-#         'photo',
-#         'is_active',
-#         'is_staff',
-#         'groups',
-#         'user_permissions',
-#     )
