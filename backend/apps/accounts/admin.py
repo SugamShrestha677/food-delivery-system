@@ -29,9 +29,3 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('username',)
 
 admin.site.register(Users, CustomUserAdmin)
-
-
-# from django.contrib.auth.admin import UserAdmin
-# Register your models here.
-# admin.site.register(Users)
-# users/admin.py
