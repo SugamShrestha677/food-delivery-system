@@ -1,6 +1,7 @@
 {% extends "sidebar.html" %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/show.css' %}">
 
         <!-- Main Content -->
         <div class="flex-1 flex flex-col min-w-0">
@@ -107,7 +108,6 @@
                                     <th class="text-left p-4 text-sm font-medium text-brand-gray">Price</th>
                                     <th class="text-left p-4 text-sm font-medium text-brand-gray">Status</th>
                                     <th class="text-left p-4 text-sm font-medium text-brand-gray">Prep Time</th>
-                                    <th class="text-left p-4 text-sm font-medium text-brand-gray">Popularity</th>
                                     <th class="text-left p-4 text-sm font-medium text-brand-gray">Actions</th>
                                 </tr>
                             </thead>
@@ -131,7 +131,7 @@
     </div>
 
     <!-- Add/Edit Item Modal -->
-    <div id="itemModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden modal">
+    <div id="itemModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden modal-overlay">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white rounded-lg w-full max-w-2xl modal-content">
                 <div class="p-6 border-b border-brand-light-gray">
@@ -172,12 +172,16 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-brand-gray mb-2">Prep Time (minutes)</label>
-                            <input type="number" id="itemPrepTime" min="1" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent" required>
+                            <input type="text" id="itemPrepTime" min="1" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent" required>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-brand-gray mb-2">Popularity (%)</label>
-                            <input type="number" id="itemPopularity" min="0" max="100" class="w-full px-3 py-2 border border-brand-light-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent" required>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-brand-gray mb-2">Item Image</label>
+                            <input type="file" id="itemPhoto" accept="image/*" 
+                                class="w-full px-3 py-2 border border-brand-light-gray rounded-lg 
+                                        focus:outline-none focus:ring-2 focus:ring-brand-orange 
+                                        focus:border-transparent">
                         </div>
+
                         <div class="md:col-span-2">
                             <div class="flex items-center gap-4">
                                 <label class="flex items-center">
@@ -208,87 +212,33 @@
         </div>
     </div>
 
-    <script>
-        // Sample menu items data
-        let menuItems = [
-            {
-                id: 1,
-                name: 'Margherita Pizza',
-                description: 'Classic pizza with tomato sauce, mozzarella, and fresh basil',
-                category: 'Pizza',
-                price: 16.99,
-                available: true,
-                prepTime: 15,
-                popularity: 95,
-                vegetarian: true,
-                vegan: false
-            },
-            {
-                id: 2,
-                name: 'Chicken Carbonara',
-                description: 'Creamy pasta with grilled chicken, bacon, and parmesan',
-                category: 'Pasta',
-                price: 22.50,
-                available: true,
-                prepTime: 20,
-                popularity: 88,
-                vegetarian: false,
-                vegan: false
-            },
-            {
-                id: 3,
-                name: 'Caesar Salad',
-                description: 'Fresh romaine lettuce with caesar dressing, croutons, and parmesan',
-                category: 'Salads',
-                price: 12.99,
-                available: true,
-                prepTime: 10,
-                popularity: 75,
-                vegetarian: true,
-                vegan: false
-            },
-            {
-                id: 4,
-                name: 'Tiramisu',
-                description: 'Classic Italian dessert with coffee-soaked ladyfingers and mascarpone',
-                category: 'Desserts',
-                price: 8.99,
-                available: false,
-                prepTime: 5,
-                popularity: 92,
-                vegetarian: true,
-                vegan: false
-            },
-            {
-                id: 5,
-                name: 'Bruschetta',
-                description: 'Toasted bread with fresh tomatoes, garlic, and basil',
-                category: 'Appetizers',
-                price: 9.99,
-                available: true,
-                prepTime: 8,
-                popularity: 82,
-                vegetarian: true,
-                vegan: true
-            },
-            {
-                id: 6,
-                name: 'Espresso',
-                description: 'Rich Italian coffee served in traditional small cup',
-                category: 'Beverages',
-                price: 3.50,
-                available: true,
-                prepTime: 2,
-                popularity: 90,
-                vegetarian: true,
-                vegan: true
-            }
-        ];
 
-        let filteredItems = [...menuItems];
-        let editingItemId = null;
+            
+            <script>
+            // Mobile menu functionality
+        let menuItems = [];       // All menu items fetched from backend
+        let filteredItems = [];   // Filtered items for search/category filtering
+        let editingItemId = null;  // current item being edited
+        let restaurantId = null;   // store restaurant ID
+        
 
-        // Mobile menu functionality
+
+        const prepInput = document.getElementById("itemPrepTime").value;
+const prepTimeMinutes = parseInt(prepInput, 10) || 0; // default to 0 if empty
+
+const hours = Math.floor(prepTimeMinutes / 60).toString().padStart(2, '0');
+const minutes = (prepTimeMinutes % 60).toString().padStart(2, '0');
+const seconds = '00';
+
+const durationStr = `${hours}:${minutes}:${seconds}`;
+
+function convertHHMMSSToMinutes(durationStr) {
+    if (!durationStr) return 0;
+    const parts = durationStr.split(':'); // ["hh","mm","ss"]
+    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+}
+
+        
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebar = document.getElementById('sidebar');
         const mobileOverlay = document.getElementById('mobileOverlay');
@@ -323,7 +273,6 @@
                 document.getElementById('itemCategory').value = item.category;
                 document.getElementById('itemPrice').value = item.price;
                 document.getElementById('itemPrepTime').value = item.prepTime;
-                document.getElementById('itemPopularity').value = item.popularity;
                 document.getElementById('itemVegetarian').checked = item.vegetarian;
                 document.getElementById('itemVegan').checked = item.vegan;
                 document.getElementById('itemAvailable').checked = item.available;
@@ -357,45 +306,164 @@
             }
         });
 
-        // Form submission
-        itemForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('itemName').value,
-                description: document.getElementById('itemDescription').value,
-                category: document.getElementById('itemCategory').value,
-                price: parseFloat(document.getElementById('itemPrice').value),
-                prepTime: parseInt(document.getElementById('itemPrepTime').value),
-                popularity: parseInt(document.getElementById('itemPopularity').value),
-                vegetarian: document.getElementById('itemVegetarian').checked,
-                vegan: document.getElementById('itemVegan').checked,
-                available: document.getElementById('itemAvailable').checked
-            };
+        async function fetchRestaurantProfile() {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+        alert("You are not logged in!");
+        return;
+    }
 
-            if (editingItemId) {
-                // Update existing item
-                const itemIndex = menuItems.findIndex(item => item.id === editingItemId);
-                if (itemIndex !== -1) {
-                    menuItems[itemIndex] = { ...menuItems[itemIndex], ...formData };
-                }
-            } else {
-                // Add new item
-                const newItem = {
-                    id: Math.max(...menuItems.map(item => item.id)) + 1,
-                    ...formData
-                };
-                menuItems.push(newItem);
-            }
-
-            updateStats();
-            filterItems();
-            renderItems();
-            closeModalFunc();
-            
-            // Show success message
-            showNotification(editingItemId ? 'Item updated successfully!' : 'Item added successfully!');
+    try {
+        const response = await fetch("http://127.0.0.1:8000/api/restaurant/me/", {
+            headers: { Authorization: `Bearer ${token}` }
         });
+        const data = await response.json();
+        console.log("✅ Restaurant profile fetched: ", data);
+        restaurantId = data.id; // store the restaurant ID
+    } catch (err) {
+        console.error("Error fetching restaurant profile:", err);
+    }
+}
+
+
+
+async function fetchMenuItems() {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+        alert("You are not logged in!");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/api/restaurant/menu-items/", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await response.json();
+
+        // Map backend fields to frontend expected fields
+        menuItems = data.map(item => ({
+            id: item.id,
+            name: item.items,               // backend 'items' → frontend 'name'
+            description: item.description,
+            category: item.category || "",
+            price: parseFloat(item.price),
+            prepTime: item.estimated_time
+,
+            available: item.is_available,
+            vegetarian: item.vegetarian || false,
+            vegan: item.vegan || false,
+            photo: item.photo || null
+        }));
+
+        filterItems();
+        renderItems();
+        updateStats();
+    } catch (err) {
+        console.error("Error fetching menu items:", err);
+        alert("Failed to fetch menu items!");
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", async function() {
+    await fetchRestaurantProfile(); // fetch restaurantId first
+    await fetchMenuItems(); 
+
+    updateStats();
+    filterItems();
+    renderItems();
+});
+
+
+        // Form submission
+itemForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+        alert("You are not logged in!");
+        return;
+    }
+
+    // Prepare FormData
+    const formData = new FormData();
+    formData.append("items", document.getElementById("itemName").value);
+    formData.append("description", document.getElementById("itemDescription").value);
+    formData.append("price", parseFloat(document.getElementById("itemPrice").value));
+    const prepMinutes = parseInt(document.getElementById("itemPrepTime").value, 10) || 0;
+    const hours = Math.floor(prepMinutes / 60);
+    const minutes = prepMinutes % 60;
+    const prepTimeFormatted = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`;
+    formData.append("estimated_time", prepTimeFormatted);
+    formData.append("is_available", document.getElementById("itemAvailable").checked ? "true" : "false");
+    formData.append("category", document.getElementById("itemCategory").value);
+
+    const photoFile = document.getElementById("itemPhoto")?.files[0];
+    if (photoFile) formData.append("photo", photoFile);
+
+    try {
+        let url = "http://127.0.0.1:8000/api/restaurant/menu-items/";
+        let method = "POST";
+
+        // If editing an existing item
+        if (editingItemId) {
+            url += `${editingItemId}/`;   // endpoint for specific item
+            method = "PUT";               // or "PATCH" if partial update
+        }
+
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                "Authorization": `Bearer ${token}` // DO NOT set Content-Type manually
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Backend error:", data);
+            alert("Error saving item! Check console for details.");
+            return;
+        }
+
+        // Map backend response to frontend structure
+        const updatedItem = {
+            id: data.id,
+            name: data.items,
+            description: data.description,
+            category: data.category || "",
+            price: parseFloat(data.price),
+            prepTime: data.estimated_time,
+            available: data.is_available,
+            vegetarian: data.vegetarian || false,
+            vegan: data.vegan || false,
+            photo: data.photo || null
+        };
+
+        if (editingItemId) {
+            // Update the existing item in menuItems array
+            const index = menuItems.findIndex(item => item.id === editingItemId);
+            if (index !== -1) menuItems[index] = updatedItem;
+            showNotification("Item updated successfully!");
+        } else {
+            // Add new item
+            menuItems.push(updatedItem);
+            showNotification("Item added successfully!");
+        }
+
+        updateStats();
+        filterItems();
+        renderItems();
+        closeModalFunc();
+        editingItemId = null; // reset after saving
+    } catch (err) {
+        console.error("Fetch error:", err);
+        alert("Network error occurred!");
+    }
+});
+
+
 
         // Render menu items table
         function renderItems() {
@@ -434,14 +502,6 @@
                         </div>
                     </td>
                     <td class="p-4 text-sm text-brand-gray">${item.prepTime} min</td>
-                    <td class="p-4">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span class="text-sm text-brand-gray">${item.popularity}%</span>
-                        </div>
-                    </td>
                     <td class="p-4">
                         <div class="flex items-center gap-2">
                             <button onclick="editItem(${item.id})" class="p-2 text-brand-gray hover:text-brand-orange transition-colors">
@@ -484,14 +544,40 @@
 
         // Delete item
         function deleteItem(itemId) {
-            if (confirm('Are you sure you want to delete this item?')) {
-                menuItems = menuItems.filter(item => item.id !== itemId);
-                updateStats();
-                filterItems();
-                renderItems();
-                showNotification('Item deleted successfully');
-            }
+    if (!confirm('Are you sure you want to delete this item?')) return;
+
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+        console.error("❌ No access token found in localStorage");
+        return;
+    }
+
+    fetch(`http://127.0.0.1:8000/api/restaurant/menu-items/${itemId}/`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
         }
+    })
+    .then(response => {
+        if (response.ok) {
+            // Remove item from frontend array and update UI
+            menuItems = menuItems.filter(item => item.id !== itemId);
+            updateStats();
+            filterItems();
+            renderItems();
+            showNotification('Item deleted successfully');
+        } else {
+            console.error("❌ Failed to delete item. Status:", response.status);
+            showNotification('Failed to delete item');
+        }
+    })
+    .catch(error => {
+        console.error("❌ Error deleting item:", error);
+        showNotification('Error deleting item');
+    });
+}
+
 
         // Update statistics
         function updateStats() {

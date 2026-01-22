@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework import viewsets
 from .models import Delivery, DeliveryPerson
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from .serializers import DeliverySerializer, DeliveryPersonSerializer
 from rest_framework.permissions import AllowAny
 from apps.notifications.models import Notification  # 🔔 Import Notification
@@ -10,6 +13,7 @@ from apps.accounts.models import Users
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import CustomTokenObtainPairSerializer
+from.permission import *
 
 
 
@@ -43,3 +47,22 @@ class DeliveryPersonRegisterView(CreateAPIView):
 
 # class CustomTokenObtainPairView(TokenObtainPairView):
 #     serializer_class = CustomTokenObtainPairSerializer
+
+class DeliveryPersonDashboardAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsDeliveryPerson]
+
+    def get(self, request):
+        return Response({"message": f"Welcome {request.user.username} to the restaurant dashboard"})
+
+class DeliveryPersonProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        deliverPerson = get_object_or_404(DeliveryPerson, user=request.user)
+        serializer=DeliveryPersonSerializer(deliverPerson)
+        return Response(serializer.data)
+    def put(self, request):
+        deliverPerson = get_object_or_404(DeliveryPerson, user=request.user)
+        serializer=DeliveryPersonSerializer(deliverPerson,data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

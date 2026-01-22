@@ -16,12 +16,13 @@ User = get_user_model()
 # Custom form to accept username/email/password
 class RestaurantForm(forms.ModelForm):
     username = forms.CharField(max_length=150)
+    owner_name = forms.CharField(max_length=150)
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = Restaurant
-        fields = ['restaurant_name', 'address', 'contact', 'is_approved', 'delivery_fees', 'username', 'email', 'password','logo']
+        fields = ['restaurant_name', 'address', 'contact', 'is_approved', 'delivery_fees', 'username','owner_name', 'email', 'password','logo']
 
 class RestaurantAdmin(admin.ModelAdmin):
     form = RestaurantForm
@@ -34,6 +35,7 @@ class RestaurantAdmin(admin.ModelAdmin):
         obj = form.save(commit=False)
         user = User.objects.create_user(
             username=form.cleaned_data['username'],
+            owner_name=form.cleaned_data['owner_name'],
             email=form.cleaned_data['email'],
             password=form.cleaned_data['password']
         )

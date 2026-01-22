@@ -31,6 +31,7 @@ from .views import *
 from .views import CustomTokenObtainPairView
 from django.conf import settings
 from django.conf.urls.static import static
+from .import views
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='users')
@@ -44,8 +45,6 @@ urlpatterns = [
     path('password-reset-confirm/<int:uid>/<str:token>/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('me/', UserProfileView.as_view(), name='user-profile'),
-
-
 ]
 
     # path('users/', UserViewSet.as_view(), name='users'),

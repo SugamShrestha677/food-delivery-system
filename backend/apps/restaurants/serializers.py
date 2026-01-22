@@ -12,60 +12,54 @@ restaurant_token_generator = default_token_generator
 Users = get_user_model()
 
 class RestaurantRegisterSerializer(serializers.ModelSerializer):
-
     # These fields are for user creation
-    username = serializers.CharField(write_only=True)
     password = serializers.CharField(write_only=True)
     email = serializers.EmailField(write_only=True)
     role = serializers.CharField(default='restaurant_owner', write_only=True)
-
+    owner_name = serializers.CharField(write_only=True) 
     class Meta:
         model = Restaurant
-        fields = ['restaurant_name', 'address', 'contact', 'delivery_fees','logo',
-                  'username', 'password', 'email', 'role']
+        fields = ['restaurant_name', 'address', 'contact', 'delivery_fees', 'logo',
+                  'username', 'owner_name' ,'password', 'email', 'role', 'cuisine_type']
 
-
-    
     def create(self, validated_data):
         username = validated_data.pop('username')
         password = validated_data.pop('password')
         email = validated_data.pop('email')
         role = validated_data.pop('role', 'restaurant_owner')
+        owner_name = validated_data.pop('owner_name', '')
+        logo = validated_data.pop('logo', None)
 
+        print(validated_data)  # See what's coming in
 
-        print("Creating user with:", username, password, email, role)
-        # Create the user securely
         try:
             user = Users.objects.create_user(
                 username=username,
                 password=password,
                 email=email,
                 role=role,
-                is_active=True
+                owner_name=owner_name,
+                is_active=True,
             )
-            print("✅ User created:", user.username)
         except Exception as e:
-            print("❌ Error creating user:", str(e))
             raise serializers.ValidationError(f"Failed to create user: {str(e)}")
-
-
-        print("Creating user with:", username, password, email, role)
 
         if not user:
             raise serializers.ValidationError("User creation failed; cannot create restaurant without a user.")
-        # Create and link the restaurant
-        restaurant = Restaurant.objects.create(user=user, **validated_data)
-        print("Restaurant created:", restaurant.restaurant_name, restaurant.user.username)
+
+        restaurant = Restaurant.objects.create(user=user, owner_name=owner_name,
+        username=username,logo=logo,**validated_data)
         return restaurant
+
     
 
 class GetRestaurantSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(source='user.username', read_only=True)
+    owner_name = serializers.CharField(source='user.owner_name', read_only=True)
     logo_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Restaurant
-        fields = ['id', 'username', 'restaurant_name', 'address', 'contact', 'logo_url']
+        fields = ['id', 'owner_name', 'restaurant_name', 'address', 'contact', 'logo_url', 'cuisine_type']
 
     def get_logo_url(self, obj):
         request = self.context.get('request')
@@ -84,12 +78,26 @@ class RestaurantDetailSerializer(serializers.ModelSerializer):
         model = Restaurant
         fields = ['id', 'restaurant_name', 'address', 'contact', 'menu_items']  # removed 'user'
 
+
+class RestaurantMiniSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Restaurant
+        fields = ['id', 'restaurant_name']  # include more fields if needed
+
 class MenuItemSerializer(serializers.ModelSerializer):
+    restaurant = RestaurantMiniSerializer(read_only=True)  # nested serializer
     class Meta:
         model = MenuItem
         fields = '__all__'
         read_only_fields = ['restaurant']  # auto-set from logged-in user
 
+
+
+class RestaurantSerializer(serializers.ModelSerializer):
+    # notifications = NotificationSerializer(many=True, read_only=True)
+    class Meta:
+        model = Restaurant
+        fields = '__all__'
 
 
 

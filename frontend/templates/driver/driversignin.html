@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -361,17 +362,28 @@ loginFormElement.addEventListener('submit', async function (e) {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem("access_token", data.access);
-            localStorage.setItem("refresh_token", data.refresh);
-            showToast('Login successful! Redirecting...');
-            loginFormElement.reset();
-            setTimeout(() => {
-                window.location.href = "/deliveryperson/dashboard/";
-            }, 1500);
-        } else {
-            alert("Login failed. Please check your credentials.");
-        }
+                const data = await response.json();
+
+                // Save tokens
+                localStorage.setItem("access_token", data.access);
+                localStorage.setItem("refresh_token", data.refresh);
+
+                // ✅ Check role
+                if (data.role !== 'driver') {
+                    alert("Access denied: Only drivers can login here.");
+                    localStorage.clear();
+                    return;
+                }
+
+                showToast('Login successful! Redirecting...');
+                loginFormElement.reset();
+                setTimeout(() => {
+                    window.location.href = "/deliveryperson/dashboard/";
+                }, 1500);
+            }
+            else {
+                        alert("Login failed. Please check your credentials.");
+                    }
     } catch (error) {
         alert("An error occurred: " + error.message);
     } finally {
@@ -540,5 +552,6 @@ loginFormElement.addEventListener('submit', async function (e) {
 
 
     </script>
+    <script src="{% static 'js/deliver_person_profile.js' %}"></script>
 </body>
 </html>

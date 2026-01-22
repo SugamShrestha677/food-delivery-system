@@ -38,7 +38,7 @@
                 <ul class="flex space-x-18">
                     <li><a href="/" class="text-dark text-2xl hover:text-primary font-medium">Home</a></li>
                     <li><a href="/restaurant/" class="text-dark text-2xl hover:text-primary font-medium active-link">Restaurants</a></li>
-                    <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">About us</a></li>
+                    <li><a href="/about/" class="text-dark text-2xl hover:text-primary font-medium">About us</a></li>
                     <li><a href="#" class="text-dark text-2xl hover:text-primary font-medium">Contact</a></li>
                 </ul>
             </nav>
@@ -321,8 +321,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         card.innerHTML = `
           <div class="relative h-48 lg:h-56">
-            <img src="${restaurant.logo_url || 'https://via.placeholder.com/300x200'}" alt="${restaurant.restaurant_name}" class="w-full h-full object-cover">
-            {% comment %} <img src="${restaurant.image_url || 'https://via.placeholder.com/300x200'}"
+            <img src="${restaurant.logo_url || 'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?cs=srgb&dl=pexels-pixabay-262978.jpg&fm=jpg'}" alt="${restaurant.restaurant_name}" class="w-full h-full object-cover">
+            {% comment %} <img src="${restaurant.image_url || 'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?cs=srgb&dl=pexels-pixabay-262978.jpg&fm=jpg'}"
                  alt="${restaurant.name}"
                  class="w-full h-full object-cover"> {% endcomment %}
           </div>
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${restaurant.restaurant_name}
             </h3>
             <p class="text-black text-lg tracking-tight" style="font-family: 'Inter', sans-serif; font-weight: 300;">
-             ${restaurant.cuisine || 'Unknown Cuisine'}
+             ${restaurant.cuisine_type || 'Nepali'}
             </p>
           </div>
         `;
