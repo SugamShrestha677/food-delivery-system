@@ -1,4 +1,4 @@
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const logoutBtn = document.getElementById("logoutBtn");
     const logoutModal = document.getElementById("logoutModal");
     const cancelLogout = document.getElementById("cancelLogout");
@@ -27,4 +27,3 @@
       if (e.target === logoutModal) hideModal();
     });
   });
-

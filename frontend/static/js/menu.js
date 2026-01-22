@@ -66,5 +66,3 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("❌ Error fetching menu items:", error);
     });
 });
-
-

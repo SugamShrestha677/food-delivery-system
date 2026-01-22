@@ -21,7 +21,6 @@ class RestaurantRegisterSerializer(serializers.ModelSerializer):
         model = Restaurant
         fields = ['restaurant_name', 'address', 'contact', 'delivery_fees', 'logo',
                   'username', 'owner_name' ,'password', 'email', 'role', 'cuisine_type']
-
     def create(self, validated_data):
         username = validated_data.pop('username')
         password = validated_data.pop('password')
@@ -60,6 +59,7 @@ class GetRestaurantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = ['id', 'owner_name', 'restaurant_name', 'address', 'contact', 'logo_url', 'cuisine_type']
+
 
     def get_logo_url(self, obj):
         request = self.context.get('request')

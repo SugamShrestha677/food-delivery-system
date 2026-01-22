@@ -15,7 +15,7 @@ class DeliveryPerson(models.Model):
     is_available = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username  # Fixed: use related user's username
+        return self.user.username  #  uses related user's username
  
 class Delivery(models.Model):
     STATUS_CHOICES = [
@@ -43,4 +43,5 @@ class Delivery(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+
         return f"Delivery for Order #{self.order.id}"

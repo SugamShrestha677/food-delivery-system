@@ -469,14 +469,13 @@
 
     try {
         const csrfToken = getCSRFToken();
-
         const response = await fetch('/api/restaurant/register/', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': csrfToken
                 // Don't set Content-Type manually — browser sets it automatically for FormData
             },
-            
+          
             body: formData
         });
 

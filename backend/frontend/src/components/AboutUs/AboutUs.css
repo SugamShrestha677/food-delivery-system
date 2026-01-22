@@ -1,0 +1,123 @@
+:root {
+  --text: #1C120D;
+  --color: #FFF;
+  --primary: #F60;
+  --color-2: #FFF;
+  --bg: #FCFAF7;
+  --th: #64748B;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.about-us {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* Common button styles */
+.btn {
+  display: inline-flex;
+  padding: 10px 46px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 37px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 23px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--color);
+  color: var(--primary);
+}
+
+.btn-secondary {
+  background: var(--primary);
+  color: var(--color);
+  border: 1px solid var(--color);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon styles */
+.icon-container {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.icon-bg {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(254, 178, 102, 0.33);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.icon {
+  width: 31px;
+  height: 31px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Section spacing */
+.section {
+  width: 100%;
+  position: relative;
+}
+
+/* Container for content */
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Responsive design */
+@media (max-width: 1400px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .btn {
+    font-size: 18px;
+    padding: 8px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .btn {
+    font-size: 16px;
+    padding: 6px 24px;
+  }
+}

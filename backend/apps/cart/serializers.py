@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Cart, CartItem
-from apps.restaurants.models import MenuItem  # ✅ Updated
+from apps.restaurants.models import MenuItem  
 
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,3 +29,4 @@ class CartSerializer(serializers.ModelSerializer):
 
     def get_total_price(self, obj):
         return obj.total_price()
+

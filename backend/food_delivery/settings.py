@@ -81,7 +81,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'food_delivery.urls'
+ROOT_URLCONF = 'backend.food_delivery.urls'
 
 TEMPLATES = [
     {

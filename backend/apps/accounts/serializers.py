@@ -25,7 +25,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password')  # remove password from dictionary
         user = Users(**validated_data)             # create user instance
-        user.set_password(password)    # ✅ hash password
+        user.set_password(password)    # hash password
         user.is_active = True               
         user.save()
         return user
@@ -93,4 +93,5 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     def save(self):
         user = self.validated_data['user']
         user.set_password(self.validated_data['new_password'])
+
         user.save()

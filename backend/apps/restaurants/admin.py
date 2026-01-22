@@ -3,7 +3,7 @@ from .models import *
 # Register your models here.
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
-    search_fields = ['items']  # ✅ use a valid field here
+    search_fields = ['items'] 
 
 # admin.py
 from django.contrib import admin
@@ -42,5 +42,6 @@ class RestaurantAdmin(admin.ModelAdmin):
         obj.user = user
         obj.save()
         return obj
+
 
 admin.site.register(Restaurant, RestaurantAdmin)
